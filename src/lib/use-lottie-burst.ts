@@ -9,12 +9,14 @@ interface BurstOptions {
   origin: [number, number]
   /** Frame range to play; defaults to the whole comp. */
   segment?: [number, number]
+  /** Playback speed; < 1 stretches the flight. */
+  speed?: number
 }
 
 /** One-shot Lottie burst that starts at the pointer. Put `ref` + `style` on an
  *  absolutely positioned div inside a `relative` anchor, and call `play(e)`
  *  from that anchor's click handler. Taps while it runs are ignored. */
-export function useLottieBurst({ data, size, origin, segment }: BurstOptions) {
+export function useLottieBurst({ data, size, origin, segment, speed = 1 }: BurstOptions) {
   const ref = useRef<HTMLDivElement>(null)
   const anim = useRef<AnimationItem | null>(null)
   const [playing, setPlaying] = useState(false)
@@ -29,10 +31,11 @@ export function useLottieBurst({ data, size, origin, segment }: BurstOptions) {
       svg?.style.setProperty('overflow', 'visible')
       svg?.querySelector(':scope > g[clip-path]')?.removeAttribute('clip-path')
     })
+    a.setSpeed(speed)
     a.addEventListener('complete', () => setPlaying(false))
     anim.current = a
     return () => a.destroy()
-  }, [data])
+  }, [data, speed])
 
   const play = useCallback(
     (e: MouseEvent<HTMLElement>) => {
