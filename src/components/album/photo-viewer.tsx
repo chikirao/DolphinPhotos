@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, type PanInfo } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Download, Pause, Play, X } from 'lucide-react'
-import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import { ChevronLeft, ChevronRight, Download, Pause, Play, Volume2, VolumeX, X } from 'lucide-react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import slideshowTrack from '@/assets/audio/slideshow.mp3'
 import { Button } from '@/components/ui/button'
 import { Tooltip } from '@/components/ui/tooltip'
 import { downloadPhoto } from '@/lib/download-album'
@@ -8,13 +9,21 @@ import type { Photo } from '@/lib/photos'
 import { spring } from '@/lib/springs'
 
 const SLIDESHOW_MS = 3500
+/** Slideshow steps dissolve slowly into each other. */
+const CROSSFADE = { type: 'spring' as const, duration: 1.1, bounce: 0 }
+
+type Step = { d: number; fade: boolean }
 const CHROME_H = 56
 
 interface PhotoViewerProps {
   photos: Photo[]
   index: number | null
+  /** The photo the viewer opened on — the only one that flies to/from the grid. */
+  sharedId: string | null
   playing: boolean
   onPlayingChange: (playing: boolean) => void
+  muted: boolean
+  onMutedChange: (muted: boolean) => void
   onIndexChange: (index: number) => void
   onClose: () => void
 }
@@ -42,8 +51,11 @@ export function PhotoViewer(props: PhotoViewerProps) {
 function ViewerBody({
   photos,
   index,
+  sharedId,
   playing,
   onPlayingChange,
+  muted,
+  onMutedChange,
   onIndexChange,
   onClose,
 }: PhotoViewerProps & { index: number }) {
@@ -52,6 +64,7 @@ function ViewerBody({
   // Direction of the last step: the incoming photo slides in from that side.
   // 0 means "just opened" — the photo flies out of its grid tile instead.
   const [direction, setDirection] = useState(0)
+  const step: Step = { d: direction, fade: playing }
   const [fullLoaded, setFullLoaded] = useState<Record<string, boolean>>({})
 
   const go = useCallback(
@@ -81,6 +94,27 @@ function ViewerBody({
     const t = setTimeout(() => go(1), SLIDESHOW_MS)
     return () => clearTimeout(t)
   }, [playing, index, go])
+
+  // The slideshow has a soundtrack: it plays while the slideshow runs.
+  const audio = useRef<HTMLAudioElement | null>(null)
+  useEffect(() => {
+    const a = new Audio(slideshowTrack)
+    a.loop = true
+    audio.current = a
+    return () => {
+      a.pause()
+      audio.current = null
+    }
+  }, [])
+  useEffect(() => {
+    const a = audio.current
+    if (!a) return
+    if (playing) a.play().catch(() => {})
+    else a.pause()
+  }, [playing])
+  useEffect(() => {
+    if (audio.current) audio.current.muted = muted
+  }, [muted])
 
   // Lock page scroll while open.
   useEffect(() => {
@@ -145,6 +179,17 @@ function ViewerBody({
           {index + 1} of {photos.length}
         </span>
         <div className="flex items-center gap-1 justify-self-end">
+          <Tooltip content={muted ? 'Unmute' : 'Mute'} side="bottom">
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label={muted ? 'Unmute' : 'Mute'}
+              onClick={() => onMutedChange(!muted)}
+              className={chromeButton}
+            >
+              {muted ? <VolumeX /> : <Volume2 />}
+            </Button>
+          </Tooltip>
           <Tooltip content={playing ? 'Pause slideshow' : 'Play slideshow'} side="bottom">
             <Button
               variant="ghost"
@@ -168,20 +213,22 @@ function ViewerBody({
         className="pointer-events-none relative flex flex-1 items-center justify-center"
         style={{ paddingBottom: CHROME_H }}
       >
-        <AnimatePresence initial={false} custom={direction} mode="popLayout">
+        <AnimatePresence initial={false} custom={step} mode="popLayout">
           <motion.div
             key={photo.id}
-            layoutId={`photo-${photo.id}`}
-            custom={direction}
+            // Only the photo the viewer opened on is linked to its grid tile;
+            // the rest crossfade (slideshow) or slide (manual) in place.
+            layoutId={photo.id === sharedId ? `photo-${photo.id}` : undefined}
+            custom={step}
             variants={{
-              enter: (d: number) => ({ x: d * 80, opacity: 0 }),
-              center: { x: 0, opacity: 1 },
-              exit: (d: number) => (d === 0 ? {} : { x: d * -80, opacity: 0 }),
+              enter: ({ d, fade }: Step) => (fade ? { opacity: 0, scale: 1.02, x: 0 } : { x: d * 60, opacity: 0 }),
+              center: { x: 0, opacity: 1, scale: 1 },
+              exit: ({ d, fade }: Step) => (fade ? { opacity: 0 } : d === 0 ? {} : { x: d * -60, opacity: 0 }),
             }}
             initial={direction === 0 ? false : 'enter'}
             animate="center"
             exit="exit"
-            transition={spring.slow}
+            transition={playing ? CROSSFADE : spring.slow}
             drag
             dragSnapToOrigin
             dragElastic={0.6}

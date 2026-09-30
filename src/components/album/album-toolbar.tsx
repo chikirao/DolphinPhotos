@@ -25,7 +25,6 @@ interface AlbumToolbarProps {
   onToggleSort: () => void
   zoom: number
   onZoom: (zoom: number) => void
-  onDownload: () => void
   onSlideshow: () => void
 }
 
@@ -33,11 +32,13 @@ function ToolButton({
   label,
   icon,
   onClick,
+  disabled,
   flip,
 }: {
   label: string
   icon: string
   onClick?: () => void
+  disabled?: boolean
   flip?: boolean
 }) {
   return (
@@ -47,7 +48,8 @@ function ToolButton({
         size="icon-compact"
         aria-label={label}
         onClick={onClick}
-        className="mx-[3px] size-8 min-w-8 rounded-lg p-0"
+        disabled={disabled}
+        className="mx-[3px] size-8 min-w-8 rounded-lg p-0 disabled:opacity-30"
       >
         <motion.img
           src={icon}
@@ -133,16 +135,12 @@ export function AlbumToolbar(props: AlbumToolbarProps) {
         </div>
 
         <div className="col-start-3 flex items-center justify-self-end">
-          {/* Right-hand actions all throw a spray to the lower left. */}
-          <SplashOnClick>
-            <ToolButton icon={addPhotoIcon} label="Add to Library" />
-          </SplashOnClick>
-          <SplashOnClick className="hidden sm:inline-flex">
-            <ToolButton icon={downloadIcon} label="Download all" onClick={props.onDownload} />
-          </SplashOnClick>
-          <SplashOnClick className="hidden sm:inline-flex">
+          <ToolButton icon={addPhotoIcon} label="Add to Library" disabled />
+          <span className="hidden sm:contents">
+            <ToolButton icon={downloadIcon} label="Download all" disabled />
             <ToolButton icon={slideshowIcon} label="Slideshow" onClick={props.onSlideshow} />
-          </SplashOnClick>
+          </span>
+          {/* Just for fun: a spray to the lower left. */}
           <SplashOnClick>
             <ToolButton icon={moreIcon} label="More" />
           </SplashOnClick>

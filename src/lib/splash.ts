@@ -96,6 +96,9 @@ function heading(layer: Layer): { angle: number; center: Vec } {
 
 export function randomSplash(base: unknown, origin: [number, number], fan = FAN_RIGHT): Comp {
   const src = base as Comp
+  // The drop art has a curled tail swept for rightward flight; mirror it for
+  // sprays that head left so the curl still trails behind.
+  const mirror = (fan[0] + fan[1]) / 2 > 90
   const out: Comp = structuredClone(src)
   out.layers = []
 
@@ -108,6 +111,9 @@ export function randomSplash(base: unknown, origin: [number, number], fan = FAN_
     const layer: Layer = structuredClone(src.layers[n % src.layers.length])
     freeze(layer.shapes, peakTime(layer))
     const art = heading(layer)
+    // Mirroring flips the art's heading about the vertical axis.
+    const artAngle = mirror ? 180 - art.angle : art.angle
+    const sx = mirror ? -1 : 1
 
     const slot = fan[0] + ((fan[1] - fan[0]) * (slots[n] + 0.5)) / DROPS
     const angle = slot + rand(-8, 8)
@@ -139,8 +145,8 @@ export function randomSplash(base: unknown, origin: [number, number], fan = FAN_
       r: {
         a: 1,
         k: [
-          { t: start, s: [angle - art.angle], o: { x: [0.2], y: [0.6] }, i: { x: [0.55], y: [1] } },
-          { t: end, s: [90 - art.angle] },
+          { t: start, s: [angle - artAngle], o: { x: [0.2], y: [0.6] }, i: { x: [0.55], y: [1] } },
+          { t: end, s: [90 - artAngle] },
         ],
       },
       p: {
@@ -163,8 +169,8 @@ export function randomSplash(base: unknown, origin: [number, number], fan = FAN_
         a: 1,
         k: [
           // Pops to full size fast, then shrinks steadily while still flying.
-          { t: start, s: [8, 8, 100], o: { x: [0.15, 0.15, 0.15], y: [0.8, 0.8, 0.8] }, i: { x: [0.4, 0.4, 0.4], y: [1, 1, 1] } },
-          { t: grown, s: [size, size, 100], o: { x: [0.3, 0.3, 0.3], y: [0, 0, 0] }, i: { x: [0.6, 0.6, 0.6], y: [1, 1, 1] } },
+          { t: start, s: [8 * sx, 8, 100], o: { x: [0.15, 0.15, 0.15], y: [0.8, 0.8, 0.8] }, i: { x: [0.4, 0.4, 0.4], y: [1, 1, 1] } },
+          { t: grown, s: [size * sx, size, 100], o: { x: [0.3, 0.3, 0.3], y: [0, 0, 0] }, i: { x: [0.6, 0.6, 0.6], y: [1, 1, 1] } },
           { t: end, s: [0, 0, 100] },
         ],
       },

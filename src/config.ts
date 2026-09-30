@@ -27,8 +27,6 @@ export const album = {
   ],
   /** Emoji inside the album tile. */
   emoji: '🐬',
-  /** Filename of the zip produced by "Download Album". */
-  zipName: 'DolphinPhotos.zip',
   footer: {
     copyright: '© 2026 Dolphins Forever',
     privacyUrl: '#',
