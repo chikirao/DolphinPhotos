@@ -2,13 +2,17 @@ import feedbackIcon from '@/assets/icons/feedback.svg'
 import logoSplashData from '@/assets/lottie/logo-splash.json'
 import { Button } from '@/components/ui/button'
 import { Tooltip } from '@/components/ui/tooltip'
+import { randomSplash } from '@/lib/splash'
 import { useLottieBurst } from '@/lib/use-lottie-burst'
+
+const SPLASH_ORIGIN: [number, number] = [256, 256]
+const makeSplash = (data: unknown) => randomSplash(data, SPLASH_ORIGIN)
 
 /** "Dolphin Photos" wordmark. A tap sprays drops from the pointer; they grow
  *  out of it and shrink away as they fly. Taps are ignored mid-spray. */
 function Logo() {
-  // The spray (frames 23–90 of the comp) starts at ~(97, 215).
-  const splash = useLottieBurst({ data: logoSplashData, size: 200, origin: [97, 215], segment: [23, 90], speed: 0.8 })
+  // Drops are regenerated on every tap from the comp's center.
+  const splash = useLottieBurst({ data: logoSplashData, size: 200, origin: SPLASH_ORIGIN, randomize: makeSplash })
 
   return (
     <button

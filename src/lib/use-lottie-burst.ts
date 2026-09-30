@@ -9,33 +9,41 @@ interface BurstOptions {
   origin: [number, number]
   /** Frame range to play; defaults to the whole comp. */
   segment?: [number, number]
-  /** Playback speed; < 1 stretches the flight. */
-  speed?: number
+  /** Rebuild the animation from `data` on every play (e.g. random trajectories). */
+  randomize?: (data: unknown) => unknown
 }
 
 /** One-shot Lottie burst that starts at the pointer. Put `ref` + `style` on an
  *  absolutely positioned div inside a `relative` anchor, and call `play(e)`
  *  from that anchor's click handler. Taps while it runs are ignored. */
-export function useLottieBurst({ data, size, origin, segment, speed = 1 }: BurstOptions) {
+export function useLottieBurst({ data, size, origin, segment, randomize }: BurstOptions) {
   const ref = useRef<HTMLDivElement>(null)
   const anim = useRef<AnimationItem | null>(null)
   const [playing, setPlaying] = useState(false)
   const [at, setAt] = useState({ x: 0, y: 0 })
 
-  useEffect(() => {
+  const load = useCallback((animationData: unknown, autoplay: boolean) => {
     const el = ref.current!
-    const a = lottie.loadAnimation({ container: el, renderer: 'svg', loop: false, autoplay: false, animationData: data })
+    anim.current?.destroy()
+    const a = lottie.loadAnimation({ container: el, renderer: 'svg', loop: false, autoplay, animationData })
     // Drops fly past the comp bounds by design — don't clip them.
     a.addEventListener('DOMLoaded', () => {
       const svg = el.querySelector('svg')
       svg?.style.setProperty('overflow', 'visible')
       svg?.querySelector(':scope > g[clip-path]')?.removeAttribute('clip-path')
     })
-    a.setSpeed(speed)
     a.addEventListener('complete', () => setPlaying(false))
     anim.current = a
-    return () => a.destroy()
-  }, [data, speed])
+    return a
+  }, [])
+
+  useEffect(() => {
+    if (!randomize) load(data, false)
+    return () => {
+      anim.current?.destroy()
+      anim.current = null
+    }
+  }, [data, randomize, load])
 
   const play = useCallback(
     (e: MouseEvent<HTMLElement>) => {
@@ -48,11 +56,12 @@ export function useLottieBurst({ data, size, origin, segment, speed = 1 }: Burst
         y: fromPointer ? e.clientY - box.top : box.height / 2,
       })
       setPlaying(true)
-      if (segment) anim.current?.playSegments(segment, true)
+      if (randomize) load(randomize(data), true)
+      else if (segment) anim.current?.playSegments(segment, true)
       else anim.current?.goToAndPlay(0, true)
       return true
     },
-    [playing, segment],
+    [playing, segment, randomize, data, load],
   )
 
   const k = size / 512
