@@ -16,6 +16,7 @@ export default function App() {
   const [viewerIndex, setViewerIndex] = useState<number | null>(null)
   const [playing, setPlaying] = useState(false)
   const [muted, setMuted] = useState(false)
+  const [volume, setVolume] = useState(0.8)
   // The photo the viewer was opened on: only it flies between grid and viewer;
   // stepping to other photos crossfades inside the viewer.
   const [openedId, setOpenedId] = useState<string | null>(null)
@@ -69,6 +70,8 @@ export default function App() {
               onPlayingChange={setPlaying}
               muted={muted}
               onMutedChange={setMuted}
+              volume={volume}
+              onVolumeChange={setVolume}
               onIndexChange={setViewerIndex}
               onClose={() => {
                 setViewerIndex(null)

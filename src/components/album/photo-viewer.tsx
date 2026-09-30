@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, Download, Pause, Play, Volume2, VolumeX, X }
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import slideshowTrack from '@/assets/audio/slideshow.mp3'
 import { Button } from '@/components/ui/button'
+import { Slider } from '@/components/ui/slider'
 import { Tooltip } from '@/components/ui/tooltip'
 import { downloadPhoto } from '@/lib/download-album'
 import type { Photo } from '@/lib/photos'
@@ -24,6 +25,9 @@ interface PhotoViewerProps {
   onPlayingChange: (playing: boolean) => void
   muted: boolean
   onMutedChange: (muted: boolean) => void
+  /** Soundtrack volume, 0–1. */
+  volume: number
+  onVolumeChange: (volume: number) => void
   onIndexChange: (index: number) => void
   onClose: () => void
 }
@@ -56,6 +60,8 @@ function ViewerBody({
   onPlayingChange,
   muted,
   onMutedChange,
+  volume,
+  onVolumeChange,
   onIndexChange,
   onClose,
 }: PhotoViewerProps & { index: number }) {
@@ -115,6 +121,9 @@ function ViewerBody({
   useEffect(() => {
     if (audio.current) audio.current.muted = muted
   }, [muted])
+  useEffect(() => {
+    if (audio.current) audio.current.volume = volume
+  }, [volume])
 
   // Lock page scroll while open.
   useEffect(() => {
@@ -148,6 +157,7 @@ function ViewerBody({
     else if (Math.abs(info.offset.y) > 120) onClose()
   }
 
+  const silent = muted || volume === 0
   const chromeButton = 'rounded-lg text-[#0071e3] hover:text-[#0071e3]'
 
   return (
@@ -179,17 +189,42 @@ function ViewerBody({
           {index + 1} of {photos.length}
         </span>
         <div className="flex items-center gap-1 justify-self-end">
-          <Tooltip content={muted ? 'Unmute' : 'Mute'} side="bottom">
+          <Tooltip content={silent ? 'Unmute' : 'Mute'} side="bottom">
             <Button
               variant="ghost"
               size="icon"
-              aria-label={muted ? 'Unmute' : 'Mute'}
-              onClick={() => onMutedChange(!muted)}
+              aria-label={silent ? 'Unmute' : 'Mute'}
+              onClick={() => {
+                // Unmuting from a zeroed slider brings the sound back at half.
+                if (silent && volume === 0) onVolumeChange(0.5)
+                onMutedChange(!silent)
+              }}
               className={chromeButton}
             >
-              {muted ? <VolumeX /> : <Volume2 />}
+              {silent ? <VolumeX /> : <Volume2 />}
             </Button>
           </Tooltip>
+          <div className="mr-2 hidden w-20 sm:block">
+            <Slider
+              hairline
+              label="Volume"
+              min={0}
+              max={100}
+              step={1}
+              value={silent ? 0 : Math.round(volume * 100)}
+              onChange={(v) => {
+                const next = (v as number) / 100
+                onVolumeChange(next)
+                onMutedChange(next === 0)
+              }}
+              showValue={false}
+              thumbColor="#fff"
+              thumbBorderColor="#0071e3"
+              trackStyle={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
+              fillStyle={{ backgroundColor: '#0071e3' }}
+              className="-my-2"
+            />
+          </div>
           <Tooltip content={playing ? 'Pause slideshow' : 'Play slideshow'} side="bottom">
             <Button
               variant="ghost"
