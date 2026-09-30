@@ -31,8 +31,9 @@ interface Comp {
 const DROPS = 8
 /** Screen angles the spray covers (0° = right, 90° = down): a fan to the lower right. */
 const FAN: [number, number] = [5, 80]
-/** Launches are spread over this many frames (60 fps) so drops keep coming. */
-const EMIT_SPAN = 110
+/** Launches happen in a few bursts spread over this many frames (60 fps). */
+const EMIT_SPAN = 62
+const BURSTS = 4
 /** Which way each drop's round end points in its own art (deg, 0° = right,
  *  90° = down), read off the rendered shapes. The 💦 comp reuses three drops. */
 const ART_HEADING: Record<string, number> = {
@@ -97,8 +98,9 @@ export function randomSplash(base: unknown, origin: [number, number]): Comp {
   const out: Comp = structuredClone(src)
   out.layers = []
 
-  // Evenly spaced launch times with a little jitter, shuffled across angles.
-  const starts = Array.from({ length: DROPS }, (_, n) => (EMIT_SPAN * n) / DROPS + rand(0, EMIT_SPAN / DROPS / 2))
+  // A few bursts; each drop joins one, so some leave together.
+  const bursts = Array.from({ length: BURSTS }, (_, n) => (EMIT_SPAN * n) / (BURSTS - 1) + rand(-4, 4))
+  const starts = Array.from({ length: DROPS }, (_, n) => Math.max(0, bursts[n % BURSTS] + rand(0, 3)))
   const slots = Array.from({ length: DROPS }, (_, n) => n).sort(() => Math.random() - 0.5)
 
   for (let n = 0; n < DROPS; n++) {
@@ -109,9 +111,13 @@ export function randomSplash(base: unknown, origin: [number, number]): Comp {
     const slot = FAN[0] + ((FAN[1] - FAN[0]) * (slots[n] + 0.5)) / DROPS
     const angle = slot + rand(-8, 8)
     const rad = (angle * Math.PI) / 180
-    const dist = rand(170, 280)
-    const dx = Math.cos(rad) * dist
-    const dy = Math.sin(rad) * dist
+    const dist = rand(150, 240)
+    const dir = [Math.cos(rad), Math.sin(rad)]
+    // Weight: every path bends toward the ground. Drops thrown sideways curve
+    // down a lot; drops already heading down barely change course.
+    const fall = rand(90, 150)
+    const dx = dir[0] * dist * 0.85
+    const dy = dir[1] * dist * 0.85 + fall
 
     const start = starts[n]
     const life = rand(38, 50) // ~0.65–0.85 s at 60 fps
@@ -120,19 +126,35 @@ export function randomSplash(base: unknown, origin: [number, number]): Comp {
     const size = rand(30, 46)
 
     layer.ind = n + 1
+    layer.ao = 0
     layer.ip = start
     layer.op = end
     layer.ks = {
       o: { a: 0, k: 100 },
       // Anchor on the drop itself so it scales and points around its own body.
       a: { a: 0, k: art.center },
-      // Round end first: turn the art's own heading onto the flight direction.
-      r: { a: 0, k: angle - art.angle },
+      // Round end leads: start along the launch direction, end pointing down
+      // (the path arrives falling), turning as the path bends.
+      r: {
+        a: 1,
+        k: [
+          { t: start, s: [angle - art.angle], o: { x: [0.2], y: [0.6] }, i: { x: [0.55], y: [1] } },
+          { t: end, s: [90 - art.angle] },
+        ],
+      },
       p: {
         a: 1,
         k: [
           // Quick launch that keeps gliding until the drop is gone.
-          { t: start, s: [origin[0], origin[1], 0], o: { x: 0.2, y: 0.6 }, i: { x: 0.55, y: 1 } },
+          {
+            t: start,
+            s: [origin[0], origin[1], 0],
+            // Leave along the launch direction, arrive falling.
+            to: [dir[0] * dist * 0.45, dir[1] * dist * 0.45, 0],
+            ti: [0, -fall * 0.7, 0],
+            o: { x: 0.2, y: 0.6 },
+            i: { x: 0.55, y: 1 },
+          },
           { t: end, s: [origin[0] + dx, origin[1] + dy, 0] },
         ],
       },

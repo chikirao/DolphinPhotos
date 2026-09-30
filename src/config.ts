@@ -34,7 +34,6 @@ export const album = {
     { name: 'Диана ДТА', handle: 'dtaintent', url: 'https://t.me/dtaintent' },
     { name: 'Никита Иванец', handle: 'ni24lab', url: 'https://t.me/ni24lab' },
   ],
-  reportUrl: 'https://t.me/ni24lab',
   footer: {
     copyright: '© 2026 Dolphins Forever',
     privacyUrl: '#',
