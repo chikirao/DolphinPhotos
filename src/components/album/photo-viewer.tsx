@@ -7,11 +7,15 @@ import { Tooltip } from '@/components/ui/tooltip'
 import { downloadPhoto } from '@/lib/download-album'
 import type { Photo } from '@/lib/photos'
 import { spring } from '@/lib/springs'
+import { soundtrack } from '@/config'
 
-/** Slideshow soundtrack: every mp3 in src/assets/audio. */
-const TRACKS = Object.values(
+/** Slideshow soundtrack: every mp3 in src/assets/audio, credited from config. */
+const TRACKS = Object.entries(
   import.meta.glob<string>('../../assets/audio/*.mp3', { eager: true, query: '?url', import: 'default' }),
-)
+).map(([path, src]) => {
+  const file = path.split('/').pop()!.replace(/\.mp3$/, '')
+  return { src, ...(soundtrack[file] ?? { title: file, artist: '' }) }
+})
 const SLIDESHOW_MS = 3500
 /** Slideshow steps dissolve slowly into each other. */
 const CROSSFADE = { type: 'spring' as const, duration: 1.1, bounce: 0 }
@@ -107,14 +111,11 @@ function ViewerBody({
   // The slideshow has a soundtrack: it plays while the slideshow runs. Each
   // viewer session starts on a random track and then goes through the list.
   const audio = useRef<HTMLAudioElement | null>(null)
+  const [track, setTrack] = useState(() => Math.floor(Math.random() * TRACKS.length))
   useEffect(() => {
-    let track = Math.floor(Math.random() * TRACKS.length)
-    const a = new Audio(TRACKS[track])
-    a.addEventListener('ended', () => {
-      track = (track + 1) % TRACKS.length
-      a.src = TRACKS[track]
-      a.play().catch(() => {})
-    })
+    const a = new Audio()
+    a.preload = 'none'
+    a.addEventListener('ended', () => setTrack((t) => (t + 1) % TRACKS.length))
     audio.current = a
     return () => {
       a.pause()
@@ -124,9 +125,11 @@ function ViewerBody({
   useEffect(() => {
     const a = audio.current
     if (!a) return
+    const src = TRACKS[track].src
+    if (!a.src.endsWith(src)) a.src = src
     if (playing) a.play().catch(() => {})
     else a.pause()
-  }, [playing])
+  }, [playing, track])
   useEffect(() => {
     if (audio.current) audio.current.muted = muted
   }, [muted])
@@ -306,7 +309,58 @@ function ViewerBody({
           </>
         )}
       </div>
+
+      <AnimatePresence>{playing && <NowPlaying key="now-playing" {...TRACKS[track]} />}</AnimatePresence>
     </motion.div>
+  )
+}
+
+/** iOS-style "now playing" capsule over the bottom bar while the slideshow
+ *  runs: frosted glass, a live equalizer, the song over its artist. */
+function NowPlaying({ title, artist }: { title: string; artist: string }) {
+  return (
+    <motion.div
+      className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-14 items-center justify-center pb-[env(safe-area-inset-bottom)]"
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 12, transition: spring.moderate.exit }}
+      transition={spring.slow}
+    >
+      <div className="flex max-w-[calc(100vw-32px)] items-center gap-2.5 rounded-full border border-black/5 bg-white/75 py-1.5 pr-4 pl-3 shadow-[0_4px_16px_rgba(0,0,0,0.08)] backdrop-blur-xl backdrop-saturate-150">
+        <Equalizer />
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.div
+            key={title}
+            className="min-w-0 leading-tight"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6, transition: spring.moderate.exit }}
+            transition={spring.slow}
+          >
+            <div className="truncate text-[13px] font-semibold text-black/88">{title}</div>
+            {artist && <div className="truncate text-[12px] text-black/50">{artist}</div>}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </motion.div>
+  )
+}
+
+/** Apple Music's playing indicator: four bars bouncing out of step. */
+function Equalizer() {
+  return (
+    <div className="flex h-3.5 shrink-0 items-end gap-[2px]" aria-hidden>
+      {[0.55, 1, 0.7, 0.85].map((peak, i) => (
+        <motion.span
+          key={i}
+          className="w-[3px] origin-bottom rounded-full bg-[#0071e3]"
+          style={{ height: '100%' }}
+          initial={{ scaleY: 0.25 }}
+          animate={{ scaleY: peak }}
+          transition={{ ...spring.slow, repeat: Infinity, repeatType: 'mirror', delay: i * 0.12 }}
+        />
+      ))}
+    </div>
   )
 }
 

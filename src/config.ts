@@ -32,3 +32,12 @@ export const album = {
     privacyUrl: '#',
   },
 } as const
+
+/** Slideshow soundtrack credits, keyed by the mp3 file name in src/assets/audio. */
+export const soundtrack: Record<string, { title: string; artist: string }> = {
+  'dylan-thom-if-youre-gonna-kill-me': { title: "If You're Gonna Kill Me", artist: 'Dylan Thom' },
+  'liam-mc-cay-clear': { title: 'Clear (feat. Dylan Thom)', artist: 'Liam Mc Cay' },
+  'sacred-holes-tiger': { title: 'Tiger', artist: 'Sacred Holes' },
+  'tal-castle-my-amazing-saturday': { title: 'My Amazing Saturday', artist: 'tal castle' },
+  'after-300-dreams': { title: '300 dreams', artist: 'AFTER' },
+}

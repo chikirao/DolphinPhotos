@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { Photo } from '@/lib/photos'
 import { spring } from '@/lib/springs'
 import { cn } from '@/lib/utils'
@@ -87,10 +87,21 @@ function PhotoTile({
   onOpen: (photo: Photo) => void
 }) {
   const [loaded, setLoaded] = useState(false)
+  const [morphed, setMorphed] = useState(false)
   const ratio = photo.thumb.width / photo.thumb.height
-  // Fit mode: the image keeps its aspect inside the square box, centered.
-  const w = square ? box : ratio >= 1 ? box : box * ratio
-  const h = square ? box : ratio >= 1 ? box / ratio : box
+  // Like iCloud: every tile waits as a gray square; once its image is in, the
+  // square morphs to the photo's shape (fit mode) and the image fades in.
+  const fit = !square && loaded
+  const w = fit && ratio < 1 ? box * ratio : box
+  const h = fit && ratio > 1 ? box / ratio : box
+  const morphs = !square && Math.abs(ratio - 1) > 0.01
+  const shown = loaded && (!morphs || morphed)
+  // Fallback in case the morph never reports back (e.g. layout was skipped).
+  useEffect(() => {
+    if (!loaded || morphed) return
+    const t = setTimeout(() => setMorphed(true), spring.slow.duration * 1000 + 200)
+    return () => clearTimeout(t)
+  }, [loaded, morphed])
 
   return (
     <motion.button
@@ -109,6 +120,7 @@ function PhotoTile({
         <motion.div
           layoutId={`photo-${photo.id}`}
           transition={spring.slow}
+          onLayoutAnimationComplete={() => loaded && setMorphed(true)}
           whileHover={{ scale: 1.025 }}
           whileTap={{ scale: 0.97 }}
           style={{ width: w, height: h }}
@@ -125,7 +137,7 @@ function PhotoTile({
             draggable={false}
             onLoad={() => setLoaded(true)}
             initial={false}
-            animate={{ opacity: loaded ? 1 : 0 }}
+            animate={{ opacity: shown ? 1 : 0 }}
             transition={spring.slow}
             className="absolute inset-0 size-full object-cover select-none"
           />

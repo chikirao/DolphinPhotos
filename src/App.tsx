@@ -1,11 +1,12 @@
 import { LayoutGroup, useInView } from 'framer-motion'
-import { useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AlbumFooter } from '@/components/album/album-footer'
 import { AlbumHero } from '@/components/album/album-hero'
 import { AlbumToolbar } from '@/components/album/album-toolbar'
 import { AppHeader } from '@/components/album/app-header'
 import { PhotoGrid } from '@/components/album/photo-grid'
 import { PhotoViewer } from '@/components/album/photo-viewer'
+import { SplashRain } from '@/components/album/splash-rain'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { photos as allPhotos } from '@/lib/photos'
 
@@ -27,6 +28,40 @@ export default function App() {
   const photos = useMemo(() => (reversed ? [...allPhotos].reverse() : allPhotos), [reversed])
   const currentId = viewerIndex === null ? null : (photos[viewerIndex]?.id ?? null)
   const activeId = currentId !== null && currentId === openedId ? currentId : null
+
+  // Each photo has its own link: #12 is the 12th photo of the album. Opening
+  // the viewer adds a history entry, so Back closes it instead of leaving.
+  const openFromHash = useCallback(() => {
+    const n = Number(location.hash.slice(1))
+    const photo = Number.isInteger(n) ? allPhotos[n - 1] : undefined
+    if (!photo) {
+      setViewerIndex(null)
+      setPlaying(false)
+      return
+    }
+    setOpenedId(photo.id)
+    setViewerIndex(photos.indexOf(photo))
+  }, [photos])
+  const syncFromHash = useRef(openFromHash)
+  syncFromHash.current = openFromHash
+  useEffect(() => {
+    if (location.hash) syncFromHash.current()
+    const onPop = () => syncFromHash.current()
+    window.addEventListener('popstate', onPop)
+    return () => window.removeEventListener('popstate', onPop)
+  }, [])
+  useEffect(() => {
+    const photo = allPhotos.find((p) => p.id === currentId)
+    const hash = photo ? `#${allPhotos.indexOf(photo) + 1}` : ''
+    if (location.hash === hash) return
+    const url = location.pathname + location.search + hash
+    if (!hash) {
+      // Closed from the UI: step back over our own entry, or just drop the hash.
+      if (history.state?.viewer) history.back()
+      else history.replaceState(null, '', url)
+    } else if (location.hash) history.replaceState(history.state, '', url)
+    else history.pushState({ viewer: true }, '', url)
+  }, [currentId])
 
   return (
     <TooltipProvider>
@@ -83,6 +118,7 @@ export default function App() {
             <AlbumFooter />
           </div>
         </main>
+        <SplashRain />
       </div>
     </TooltipProvider>
   )

@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import dropsData from '@/assets/lottie/logo-splash.json'
 import { FAN_LEFT, FAN_RIGHT, randomSplash } from '@/lib/splash'
 import { useLottieBurst } from '@/lib/use-lottie-burst'
 import { cn } from '@/lib/utils'
@@ -21,7 +20,7 @@ export function SplashOnClick({
   className?: string
 }) {
   const splash = useLottieBurst({
-    data: dropsData,
+    asset: 'logoSplash',
     size: 200,
     origin: ORIGIN,
     randomize: direction === 'left' ? makeLeft : makeRight,

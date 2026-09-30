@@ -1,10 +1,9 @@
-import lottie from 'lottie-web/build/player/lottie_light'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import spoutData from '@/assets/lottie/whale-spout.json'
-import whaleData from '@/assets/lottie/whale.json'
 import { Button } from '@/components/ui/button'
+import { ensure } from '@/lib/assets'
 import { spring } from '@/lib/springs'
+import { mountLottie } from '@/lib/use-lottie-burst'
 
 const WHALE = 180
 const SPOUT = 240
@@ -41,30 +40,28 @@ function Whale({ onDone }: { onDone: () => void }) {
   done.current = onDone
 
   useEffect(() => {
-    const w = lottie.loadAnimation({
-      container: whaleRef.current!,
-      renderer: 'svg',
-      loop: false,
-      autoplay: true,
-      animationData: whaleData,
+    let cancelled = false
+    let stop = () => {}
+    Promise.all([ensure('lottie'), ensure('whale'), ensure('spout')]).then(([lottie, whaleData, spoutData]) => {
+      if (cancelled) return
+      const w = lottie.loadAnimation({
+        container: whaleRef.current!,
+        renderer: 'svg',
+        loop: false,
+        autoplay: true,
+        animationData: whaleData,
+      })
+      w.addEventListener('complete', () => done.current())
+      const s = mountLottie(lottie, spoutRef.current!, spoutData, true)
+      s.addEventListener('complete', () => setSpouting(false))
+      stop = () => {
+        w.destroy()
+        s.destroy()
+      }
     })
-    w.addEventListener('complete', () => done.current())
-    const s = lottie.loadAnimation({
-      container: spoutRef.current!,
-      renderer: 'svg',
-      loop: false,
-      autoplay: true,
-      animationData: spoutData,
-    })
-    s.addEventListener('DOMLoaded', () => {
-      const svg = spoutRef.current?.querySelector('svg')
-      svg?.style.setProperty('overflow', 'visible')
-      svg?.querySelector(':scope > g[clip-path]')?.removeAttribute('clip-path')
-    })
-    s.addEventListener('complete', () => setSpouting(false))
     return () => {
-      w.destroy()
-      s.destroy()
+      cancelled = true
+      stop()
     }
   }, [])
 
