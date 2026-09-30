@@ -26,3 +26,7 @@ dist-ssr
 # Agent notes stay local
 AGENTS.md
 .claude/
+
+# Local demo filler photos (Wikimedia Commons) — not part of the drop
+src/photos/demo-*
+src/photos/DEMO-CREDITS.md

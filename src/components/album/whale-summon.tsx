@@ -10,7 +10,7 @@ const WHALE = 180
 const SPOUT = 240
 // Comp coordinates (512×512): the whale's blowhole, and where the spout
 // comp's first splash erupts. Lined up so the spout bursts from the head.
-const BLOWHOLE: [number, number] = [167, 100]
+const BLOWHOLE: [number, number] = [120, 40]
 const SPOUT_ORIGIN: [number, number] = [228, 166]
 
 /** "Summon Whale": a whale pops up above the button, plays once with a spout

@@ -3,7 +3,10 @@ import photosIcon from '@/assets/icons/photos.svg'
 import cloudDownloadIcon from '@/assets/icons/cloud-download.svg'
 import { Button } from '@/components/ui/button'
 import { album } from '@/config'
+import downloadSplashData from '@/assets/lottie/download-splash.json'
 import { DolphinTile } from '@/components/album/dolphin-tile'
+import { useLottieBurst } from '@/lib/use-lottie-burst'
+import { useMediaQuery } from '@/lib/use-media-query'
 
 const CloudDownloadIcon = () => <img src={cloudDownloadIcon} alt="" className="block" />
 
@@ -13,7 +16,14 @@ interface AlbumHeroProps {
   onDownload: () => void
 }
 
+// Fountains in this comp rise from around its middle and settle into waves
+// below; put that point on the tap so the water lands around the button.
+const DOWNLOAD_SPLASH_ORIGIN: [number, number] = [256, 380]
+
 export function AlbumHero({ count, downloading, onDownload }: AlbumHeroProps) {
+  // Twice the whale's spout (240px) on desktop, the same as it on phones.
+  const wide = useMediaQuery('(min-width: 640px)')
+  const splash = useLottieBurst({ data: downloadSplashData, size: wide ? 480 : 240, origin: DOWNLOAD_SPLASH_ORIGIN })
   return (
     <section className="flex flex-col items-center justify-center px-5 pt-6 pb-4 sm:pt-16 sm:pb-[60px] text-[#1f1f1f]">
       <DolphinTile />
@@ -59,10 +69,9 @@ export function AlbumHero({ count, downloading, onDownload }: AlbumHeroProps) {
         ))}
       </p>
 
-      <div className="pt-3 sm:pt-[15px]">
+      <div className="relative pt-3 sm:pt-[15px]" onClick={splash.play}>
         <Button
           onClick={onDownload}
-          disabled={count === 0}
           loading={downloading}
           leadingIcon={CloudDownloadIcon}
           className="h-[34px] gap-1.5 rounded-full pr-[18px] pl-4 text-sm font-medium [--background:#fff] [--foreground:#0071e3]"
@@ -70,6 +79,7 @@ export function AlbumHero({ count, downloading, onDownload }: AlbumHeroProps) {
           <span className="sm:hidden">Download</span>
           <span className="hidden sm:inline">Download Album</span>
         </Button>
+        <div ref={splash.ref} aria-hidden className="z-20" style={splash.style} />
       </div>
     </section>
   )

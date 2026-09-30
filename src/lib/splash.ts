@@ -29,8 +29,9 @@ interface Comp {
 }
 
 const DROPS = 8
-/** Screen angles the spray covers (0° = right, 90° = down): a fan to the lower right. */
-const FAN: [number, number] = [5, 80]
+/** Screen angles a spray covers (0° = right, 90° = down). */
+export const FAN_RIGHT: [number, number] = [5, 80]
+export const FAN_LEFT: [number, number] = [100, 175]
 /** Launches happen in a few bursts spread over this many frames (60 fps). */
 const EMIT_SPAN = 62
 const BURSTS = 4
@@ -93,7 +94,7 @@ function heading(layer: Layer): { angle: number; center: Vec } {
   return { angle: ART_HEADING[layer.nm as string] ?? 0, center: [cx + off[0], cy + off[1], 0] }
 }
 
-export function randomSplash(base: unknown, origin: [number, number]): Comp {
+export function randomSplash(base: unknown, origin: [number, number], fan = FAN_RIGHT): Comp {
   const src = base as Comp
   const out: Comp = structuredClone(src)
   out.layers = []
@@ -108,7 +109,7 @@ export function randomSplash(base: unknown, origin: [number, number]): Comp {
     freeze(layer.shapes, peakTime(layer))
     const art = heading(layer)
 
-    const slot = FAN[0] + ((FAN[1] - FAN[0]) * (slots[n] + 0.5)) / DROPS
+    const slot = fan[0] + ((fan[1] - fan[0]) * (slots[n] + 0.5)) / DROPS
     const angle = slot + rand(-8, 8)
     const rad = (angle * Math.PI) / 180
     const dist = rand(150, 240)

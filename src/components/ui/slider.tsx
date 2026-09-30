@@ -965,7 +965,7 @@ const CompactSlider = forwardRef<HTMLDivElement, SliderEngineProps>(
             />
             {/* Hover value tooltip */}
             <AnimatePresence>
-              {hoverPreview && showHoverTooltip && !isPressed && valuePosition !== "tooltip" && (
+              {hoverPreview && showHoverTooltip && !isPressed && valuePosition !== "tooltip" && !hairline && (
                 <motion.div
                   key="hover-tooltip"
                   className="absolute -translate-x-1/2 pointer-events-none z-20"
