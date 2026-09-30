@@ -100,7 +100,9 @@ function PhotoTile({
       aria-label={`Open ${photo.name}`}
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ ...spring.slow, delay: Math.min(index, 15) * 0.025 }}
+      // The staggered delay is for the first fade-in only; reflows on zoom move
+      // every tile at once, in step with the image resizing inside it.
+      transition={{ ...spring.slow, delay: Math.min(index, 15) * 0.025, layout: spring.slow }}
       className="group flex aspect-square w-full cursor-zoom-in items-center justify-center outline-none"
     >
       {!hidden && (
