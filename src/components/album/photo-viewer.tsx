@@ -315,52 +315,31 @@ function ViewerBody({
   )
 }
 
-/** iOS-style "now playing" capsule over the bottom bar while the slideshow
- *  runs: frosted glass, a live equalizer, the song over its artist. */
+/** Quiet gray "Now Playing" line in the bottom-left corner while the
+ *  slideshow runs. */
 function NowPlaying({ title, artist }: { title: string; artist: string }) {
   return (
     <motion.div
-      className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-14 items-center justify-center pb-[env(safe-area-inset-bottom)]"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 12, transition: spring.moderate.exit }}
+      className="pointer-events-none absolute bottom-0 left-0 z-10 flex h-14 max-w-full items-center px-4 pb-[env(safe-area-inset-bottom)] text-[13px] text-black/56"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: spring.moderate.exit }}
       transition={spring.slow}
     >
-      <div className="flex max-w-[calc(100vw-32px)] items-center gap-2.5 rounded-full border border-black/5 bg-white/75 py-1.5 pr-4 pl-3 shadow-[0_4px_16px_rgba(0,0,0,0.08)] backdrop-blur-xl backdrop-saturate-150">
-        <Equalizer />
-        <AnimatePresence mode="popLayout" initial={false}>
-          <motion.div
-            key={title}
-            className="min-w-0 leading-tight"
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6, transition: spring.moderate.exit }}
-            transition={spring.slow}
-          >
-            <div className="truncate text-[13px] font-semibold text-black/88">{title}</div>
-            {artist && <div className="truncate text-[12px] text-black/50">{artist}</div>}
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    </motion.div>
-  )
-}
-
-/** Apple Music's playing indicator: four bars bouncing out of step. */
-function Equalizer() {
-  return (
-    <div className="flex h-3.5 shrink-0 items-end gap-[2px]" aria-hidden>
-      {[0.55, 1, 0.7, 0.85].map((peak, i) => (
+      <AnimatePresence mode="popLayout" initial={false}>
         <motion.span
-          key={i}
-          className="w-[3px] origin-bottom rounded-full bg-[#0071e3]"
-          style={{ height: '100%' }}
-          initial={{ scaleY: 0.25 }}
-          animate={{ scaleY: peak }}
-          transition={{ ...spring.slow, repeat: Infinity, repeatType: 'mirror', delay: i * 0.12 }}
-        />
-      ))}
-    </div>
+          key={title}
+          className="truncate"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, transition: spring.moderate.exit }}
+          transition={spring.slow}
+        >
+          Now Playing: {title}
+          {artist && ` — ${artist}`}
+        </motion.span>
+      </AnimatePresence>
+    </motion.div>
   )
 }
 
