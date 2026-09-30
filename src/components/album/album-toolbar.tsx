@@ -47,15 +47,16 @@ function ToolButton({
     <Tooltip content={label} side="bottom">
       <Button
         variant="ghost"
-        size="compact"
+        size="icon-compact"
         aria-label={label}
         onClick={onClick}
         disabled={disabled}
-        className="mx-[3px] min-w-7 rounded-lg px-1.5 disabled:opacity-30"
+        className="mx-[3px] size-8 min-w-8 rounded-lg p-0 disabled:opacity-30"
       >
         <motion.img
           src={icon}
           alt=""
+          className="block"
           animate={{ rotate: flip ? 180 : 0 }}
           transition={spring.slow}
         />
@@ -73,7 +74,7 @@ export function AlbumToolbar(props: AlbumToolbarProps) {
         animate={{ boxShadow: props.showTitle ? '0 1px 0 rgba(0,0,0,0.1)' : '0 1px 0 rgba(0,0,0,0)' }}
         transition={spring.moderate}
       >
-        <div className="flex items-center justify-self-start">
+        <div className="hidden items-center justify-self-start sm:flex">
           <ToolButton icon={aspectIcon}
             label={props.square ? 'Aspect ratio grid' : 'Square photo grid'}
             onClick={props.onToggleSquare}
@@ -82,7 +83,7 @@ export function AlbumToolbar(props: AlbumToolbarProps) {
             label={props.reversed ? 'Sort oldest first' : 'Sort newest first'}
             onClick={props.onToggleSort}
             flip={props.reversed} />
-          <div className="hidden h-5 items-center px-[3px] sm:flex">
+          <div className="flex h-5 items-center px-[3px]">
             <Button
               variant="ghost"
               aria-label="Zoom out"
@@ -119,7 +120,7 @@ export function AlbumToolbar(props: AlbumToolbarProps) {
           </div>
         </div>
 
-        <div className="min-w-0 justify-self-center overflow-hidden">
+        <div className="col-start-2 min-w-0 justify-self-center overflow-hidden">
           <AnimatePresence>
             {props.showTitle && (
               <motion.span
@@ -135,10 +136,12 @@ export function AlbumToolbar(props: AlbumToolbarProps) {
           </AnimatePresence>
         </div>
 
-        <div className="flex items-center justify-self-end">
+        <div className="col-start-3 flex items-center justify-self-end">
           <ToolButton icon={addPhotoIcon} label="Credits" onClick={props.onCredits} />
-          <ToolButton icon={downloadIcon} label="Download all" onClick={props.onDownload} disabled={!props.hasPhotos} />
-          <ToolButton icon={slideshowIcon} label="Slideshow" onClick={props.onSlideshow} disabled={!props.hasPhotos} />
+          <div className="hidden sm:contents">
+            <ToolButton icon={downloadIcon} label="Download all" onClick={props.onDownload} disabled={!props.hasPhotos} />
+            <ToolButton icon={slideshowIcon} label="Slideshow" onClick={props.onSlideshow} disabled={!props.hasPhotos} />
+          </div>
           <ToolButton icon={moreIcon} label="More" disabled />
         </div>
       </motion.div>

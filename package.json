@@ -17,6 +17,7 @@
     "cn": "^0.4.0",
     "fflate": "^0.8.3",
     "framer-motion": "^13.4.6",
+    "lottie-web": "^5.13.0",
     "lucide-react": "^1.49.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

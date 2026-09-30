@@ -8,6 +8,11 @@ import { cn } from '@/lib/utils'
 const BOX_SIZES = [96, 124, 156, 191, 250, 330]
 const GAP_X = 16
 const GAP_Y = 34
+/** Below this width the grid switches to iCloud's phone layout:
+ *  three square columns, hairline gaps, edge to edge. */
+const MOBILE_MAX = 600
+const MOBILE_COLS = 3
+const MOBILE_GAP = 2
 
 interface PhotoGridProps {
   photos: Photo[]
@@ -33,19 +38,20 @@ function useWidth<T extends HTMLElement>() {
 
 export function PhotoGrid({ photos, zoom, square, activeId, onOpen }: PhotoGridProps) {
   const [ref, width] = useWidth<HTMLDivElement>()
+  const mobile = width > 0 && width < MOBILE_MAX
   const target = BOX_SIZES[zoom]
-  const cols = Math.max(2, Math.round((width + GAP_X) / (target + GAP_X)))
-  const box = width ? (width - GAP_X * (cols - 1)) / cols : target
-  // Narrow screens tighten the vertical rhythm with the boxes.
-  const gapY = Math.min(GAP_Y, Math.max(GAP_X, box * 0.18))
+  const gapX = mobile ? MOBILE_GAP : GAP_X
+  const gapY = mobile ? MOBILE_GAP : GAP_Y
+  const cols = mobile ? MOBILE_COLS : Math.max(2, Math.round((width + gapX) / (target + gapX)))
+  const box = width ? (width - gapX * (cols - 1)) / cols : target
 
   return (
-    <div ref={ref} className="mx-auto w-full max-w-[1440px] px-2 sm:px-6">
+    <div ref={ref} className="mx-auto w-full max-w-[1440px] px-1.5 sm:px-6">
       <div
         className="grid"
         style={{
           gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-          columnGap: GAP_X,
+          columnGap: gapX,
           rowGap: gapY,
         }}
       >
@@ -54,7 +60,7 @@ export function PhotoGrid({ photos, zoom, square, activeId, onOpen }: PhotoGridP
             key={photo.id}
             photo={photo}
             box={box}
-            square={square}
+            square={square || mobile}
             hidden={photo.id === activeId}
             index={i}
             onOpen={onOpen}

@@ -1,10 +1,11 @@
-import { motion } from 'framer-motion'
 import timerIcon from '@/assets/icons/timer.svg'
 import photosIcon from '@/assets/icons/photos.svg'
 import cloudDownloadIcon from '@/assets/icons/cloud-download.svg'
 import { Button } from '@/components/ui/button'
 import { album } from '@/config'
-import { spring } from '@/lib/springs'
+import { DolphinTile } from '@/components/album/dolphin-tile'
+
+const CloudDownloadIcon = () => <img src={cloudDownloadIcon} alt="" className="block" />
 
 interface AlbumHeroProps {
   count: number
@@ -14,17 +15,8 @@ interface AlbumHeroProps {
 
 export function AlbumHero({ count, downloading, onDownload }: AlbumHeroProps) {
   return (
-    <section className="flex flex-col items-center justify-center px-5 pt-16 pb-[60px] text-[#1f1f1f]">
-      <motion.div
-        className="mb-2.5 flex size-16 items-center justify-center rounded-[14.08px] bg-gradient-to-b from-white to-[#f2f2f2] text-5xl shadow-[0_4px_16px_rgba(0,0,0,0.03),0_2px_8.7px_rgba(0,0,0,0.15)] select-none"
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={spring.slow}
-        whileHover={{ scale: 1.04, rotate: -3 }}
-        whileTap={{ scale: 0.96 }}
-      >
-        {album.emoji}
-      </motion.div>
+    <section className="flex flex-col items-center justify-center px-5 pt-6 pb-4 sm:pt-16 sm:pb-[60px] text-[#1f1f1f]">
+      <DolphinTile />
 
       {album.expires && (
         <div className="py-[5px]">
@@ -35,26 +27,49 @@ export function AlbumHero({ count, downloading, onDownload }: AlbumHeroProps) {
         </div>
       )}
 
-      <h1 className="text-[32px] leading-[38px] font-bold">{album.title}</h1>
+      <h1 className="text-[26px] leading-[32px] font-bold sm:text-[32px] sm:leading-[38px]">{album.title}</h1>
 
-      <p className="flex items-center pt-1.5 text-base">
+      <p className="flex items-center pt-1 text-[13px] sm:pt-1.5 sm:text-base">
         <img src={photosIcon} alt="" className="mr-[5px]" />
-        <span className="whitespace-pre">
-          {count} {count === 1 ? 'Item' : 'Items'}  ·  Created by {album.createdBy}
+        <span>
+          {count} {count === 1 ? 'Item' : 'Items'}
         </span>
       </p>
 
-      <div className="pt-[15px]">
+      <p className="flex max-w-[560px] flex-wrap items-center justify-center gap-x-2 gap-y-0.5 pt-1 text-center text-[13px] text-black/56 sm:text-sm">
+        {album.people.map((group, i) => (
+          <span key={group.label} className="inline-flex basis-full items-center justify-center gap-2 sm:basis-auto">
+            {i > 0 && <span aria-hidden className="hidden sm:inline">·</span>}
+            <span>
+              {group.label}{' '}
+              {group.links.map((link, j) => (
+                <span key={link.name}>
+                  {j > 0 && ' & '}
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[#0071e3] underline-offset-2 transition-colors duration-80 hover:underline"
+                  >
+                    {link.name}
+                  </a>
+                </span>
+              ))}
+            </span>
+          </span>
+        ))}
+      </p>
+
+      <div className="pt-3 sm:pt-[15px]">
         <Button
           onClick={onDownload}
           disabled={count === 0}
           loading={downloading}
-          className="h-[34px] rounded-full px-[18px] text-sm font-medium [--background:#fff] [--foreground:#0071e3]"
+          leadingIcon={CloudDownloadIcon}
+          className="h-[34px] gap-1.5 rounded-full pr-[18px] pl-4 text-sm font-medium [--background:#fff] [--foreground:#0071e3]"
         >
-          <span className="inline-flex items-center whitespace-nowrap">
-            <img src={cloudDownloadIcon} alt="" className="mr-1.5" />
-            Download Album
-          </span>
+          <span className="sm:hidden">Download</span>
+          <span className="hidden sm:inline">Download Album</span>
         </Button>
       </div>
     </section>

@@ -4,7 +4,27 @@ export const album = {
   title: 'Sep 27, 2026',
   /** Pill above the title. Set to null to hide it. */
   expires: 'EXPIRES OCTOBER 30',
-  createdBy: 'Иван Конанчук',
+  /** "Created by / Model / Help" line under the item count. */
+  people: [
+    {
+      label: 'Created by',
+      links: [
+        { name: 'dta', url: 'https://t.me/dtaintent' },
+        { name: 'ni24lab', url: 'https://t.me/ni24lab' },
+      ],
+    },
+    {
+      label: 'Model',
+      links: [
+        { name: 'elizabethmeunieer', url: 'https://instagram.com/elizabethmeunieer' },
+        { name: 'uglymnstr7', url: 'https://instagram.com/uglymnstr7' },
+      ],
+    },
+    {
+      label: 'Help',
+      links: [{ name: 'chikirao', url: 'https://t.me/chikikto' }],
+    },
+  ],
   /** Emoji inside the album tile. */
   emoji: '🐬',
   /** Filename of the zip produced by "Download Album". */
@@ -16,7 +36,7 @@ export const album = {
   ],
   reportUrl: 'https://t.me/ni24lab',
   footer: {
-    copyright: 'Copyright © 2026 Apple Inc. All rights reserved.',
+    copyright: '© 2026 Dolphins Forever',
     privacyUrl: '#',
     termsUrl: '#',
   },
