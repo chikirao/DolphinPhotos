@@ -36,10 +36,9 @@ export function AlbumHero({ count, downloading, onDownload }: AlbumHeroProps) {
         </span>
       </p>
 
-      <p className="flex max-w-[560px] flex-wrap items-center justify-center gap-x-2 gap-y-0.5 pt-1 text-center text-[13px] text-black/56 sm:text-sm">
-        {album.people.map((group, i) => (
-          <span key={group.label} className="inline-flex basis-full items-center justify-center gap-2 sm:basis-auto">
-            {i > 0 && <span aria-hidden className="hidden sm:inline">·</span>}
+      <p className="flex flex-col items-center gap-0.5 pt-1.5 text-center text-[13px] text-black/56 sm:text-sm">
+        {album.people.map((group) => (
+          <span key={group.label}>
             <span>
               {group.label}{' '}
               {group.links.map((link, j) => (

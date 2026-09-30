@@ -4,16 +4,17 @@ import { useEffect, useRef, useState } from 'react'
 import dolphinData from '@/assets/lottie/dolphin.json'
 import splashData from '@/assets/lottie/splash.json'
 import { spring } from '@/lib/springs'
+import { useLottieBurst } from '@/lib/use-lottie-burst'
 
 /** Album tile with the Telegram dolphin: frozen on frame 0, a tap plays it
- *  once (with the splash burst) and taps are ignored until it finishes. */
+ *  once and throws a splash from the tap point; taps are ignored until the
+ *  dolphin finishes. */
 export function DolphinTile() {
   const dolphinRef = useRef<HTMLDivElement>(null)
-  const splashRef = useRef<HTMLDivElement>(null)
   const dolphin = useRef<AnimationItem | null>(null)
-  const splash = useRef<AnimationItem | null>(null)
   const [playing, setPlaying] = useState(false)
-  const [splashing, setSplashing] = useState(false)
+  // The splash comp erupts from ~(385, 215), right of its center.
+  const splash = useLottieBurst({ data: splashData, size: 192, origin: [385, 215] })
 
   useEffect(() => {
     const d = lottie.loadAnimation({
@@ -28,36 +29,21 @@ export function DolphinTile() {
       d.goToAndStop(0, true)
       setPlaying(false)
     })
-    const s = lottie.loadAnimation({
-      container: splashRef.current!,
-      renderer: 'svg',
-      loop: false,
-      autoplay: false,
-      animationData: splashData,
-    })
-    s.addEventListener('complete', () => setSplashing(false))
     dolphin.current = d
-    splash.current = s
-    return () => {
-      d.destroy()
-      s.destroy()
-    }
+    return () => d.destroy()
   }, [])
-
-  const play = () => {
-    if (playing) return
-    setPlaying(true)
-    setSplashing(true)
-    dolphin.current?.goToAndPlay(0, true)
-    splash.current?.goToAndPlay(0, true)
-  }
 
   return (
     <div className="relative mb-2.5">
       <motion.button
         type="button"
         aria-label="Play dolphin"
-        onClick={play}
+        onClick={(e) => {
+          if (playing) return
+          setPlaying(true)
+          dolphin.current?.goToAndPlay(0, true)
+          splash.play(e)
+        }}
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={spring.slow}
@@ -65,13 +51,8 @@ export function DolphinTile() {
         style={{ cursor: playing ? 'default' : 'pointer' }}
       >
         <div ref={dolphinRef} className="size-12" />
+        <div ref={splash.ref} aria-hidden className="z-10" style={splash.style} />
       </motion.button>
-      <div
-        ref={splashRef}
-        aria-hidden
-        className="pointer-events-none absolute top-1/2 left-1/2 z-10 size-48 -translate-x-1/2 -translate-y-1/2"
-        style={{ visibility: splashing ? 'visible' : 'hidden' }}
-      />
     </div>
   )
 }
