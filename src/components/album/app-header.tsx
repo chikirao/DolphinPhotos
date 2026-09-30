@@ -8,7 +8,7 @@ import { useLottieBurst } from '@/lib/use-lottie-burst'
  *  out of it and shrink away as they fly. Taps are ignored mid-spray. */
 function Logo() {
   // The spray (frames 23–90 of the comp) starts at ~(97, 215).
-  const splash = useLottieBurst({ data: logoSplashData, size: 220, origin: [97, 215], segment: [23, 90], speed: 0.6 })
+  const splash = useLottieBurst({ data: logoSplashData, size: 200, origin: [97, 215], segment: [23, 90], speed: 0.8 })
 
   return (
     <button
