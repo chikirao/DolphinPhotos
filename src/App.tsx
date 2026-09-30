@@ -56,11 +56,7 @@ export default function App() {
         />
         <main className="flex flex-col items-center">
           <div ref={heroRef}>
-            <AlbumHero
-              count={allPhotos.length}
-              downloading={downloading}
-              onDownload={handleDownload}
-            />
+            <AlbumHero count={allPhotos.length} />
           </div>
           <LayoutGroup>
             <PhotoGrid

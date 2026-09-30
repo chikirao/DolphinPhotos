@@ -12,15 +12,13 @@ const CloudDownloadIcon = () => <img src={cloudDownloadIcon} alt="" className="b
 
 interface AlbumHeroProps {
   count: number
-  downloading: boolean
-  onDownload: () => void
 }
 
 // Fountains in this comp rise from around its middle and settle into waves
 // below; put that point on the tap so the water lands around the button.
 const DOWNLOAD_SPLASH_ORIGIN: [number, number] = [256, 380]
 
-export function AlbumHero({ count, downloading, onDownload }: AlbumHeroProps) {
+export function AlbumHero({ count }: AlbumHeroProps) {
   // Twice the whale's spout (240px) on desktop, the same as it on phones.
   const wide = useMediaQuery('(min-width: 640px)')
   const splash = useLottieBurst({ data: downloadSplashData, size: wide ? 480 : 240, origin: DOWNLOAD_SPLASH_ORIGIN })
@@ -71,8 +69,6 @@ export function AlbumHero({ count, downloading, onDownload }: AlbumHeroProps) {
 
       <div className="relative pt-3 sm:pt-[15px]" onClick={splash.play}>
         <Button
-          onClick={onDownload}
-          loading={downloading}
           leadingIcon={CloudDownloadIcon}
           className="h-[34px] gap-1.5 rounded-full pr-[18px] pl-4 text-sm font-medium [--background:#fff] [--foreground:#0071e3]"
         >
