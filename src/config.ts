@@ -30,6 +30,5 @@ export const album = {
   footer: {
     copyright: '© 2026 Dolphins Forever',
     privacyUrl: '#',
-    termsUrl: '#',
   },
 } as const

@@ -1,3 +1,4 @@
+import { PhotoCreditsLink, hasPhotoCredits } from '@/components/album/photo-credits'
 import { WhaleSummon } from '@/components/album/whale-summon'
 import { album } from '@/config'
 
@@ -16,10 +17,12 @@ export function AlbumFooter() {
             <a href={album.footer.privacyUrl} className="hover:underline">
               Privacy Policy
             </a>
-            <span className="mx-[5px] h-[15px] w-px bg-[#d1d1d6]" />
-            <a href={album.footer.termsUrl} className="hover:underline">
-              Terms &amp; Conditions
-            </a>
+            {hasPhotoCredits && (
+              <>
+                <span className="mx-[5px] h-[15px] w-px bg-[#d1d1d6]" />
+                <PhotoCreditsLink />
+              </>
+            )}
           </div>
           <p>{album.footer.copyright}</p>
         </div>
