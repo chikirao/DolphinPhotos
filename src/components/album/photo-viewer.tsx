@@ -1,7 +1,6 @@
 import { AnimatePresence, motion, type PanInfo } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Download, Pause, Play, Volume2, VolumeX, X } from 'lucide-react'
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import slideshowTrack from '@/assets/audio/slideshow.mp3'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
 import { Tooltip } from '@/components/ui/tooltip'
@@ -9,6 +8,10 @@ import { downloadPhoto } from '@/lib/download-album'
 import type { Photo } from '@/lib/photos'
 import { spring } from '@/lib/springs'
 
+/** Slideshow soundtrack: every mp3 in src/assets/audio. */
+const TRACKS = Object.values(
+  import.meta.glob<string>('../../assets/audio/*.mp3', { eager: true, query: '?url', import: 'default' }),
+)
 const SLIDESHOW_MS = 3500
 /** Slideshow steps dissolve slowly into each other. */
 const CROSSFADE = { type: 'spring' as const, duration: 1.1, bounce: 0 }
@@ -101,11 +104,17 @@ function ViewerBody({
     return () => clearTimeout(t)
   }, [playing, index, go])
 
-  // The slideshow has a soundtrack: it plays while the slideshow runs.
+  // The slideshow has a soundtrack: it plays while the slideshow runs. Each
+  // viewer session starts on a random track and then goes through the list.
   const audio = useRef<HTMLAudioElement | null>(null)
   useEffect(() => {
-    const a = new Audio(slideshowTrack)
-    a.loop = true
+    let track = Math.floor(Math.random() * TRACKS.length)
+    const a = new Audio(TRACKS[track])
+    a.addEventListener('ended', () => {
+      track = (track + 1) % TRACKS.length
+      a.src = TRACKS[track]
+      a.play().catch(() => {})
+    })
     audio.current = a
     return () => {
       a.pause()

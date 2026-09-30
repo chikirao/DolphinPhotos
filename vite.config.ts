@@ -1,3 +1,4 @@
+import fs from 'node:fs'
 import path from 'node:path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
@@ -6,8 +7,9 @@ import { imagetools } from 'vite-imagetools'
 
 // https://vite.dev/config/
 export default defineConfig({
-  // Custom domain on GitHub Pages → the site is served from the root.
-  base: '/',
+  // With a custom domain (public/CNAME) Pages serves the site from the root;
+  // without one it lives at chikirao.github.io/DolphinPhotos/.
+  base: fs.existsSync(path.resolve(__dirname, 'public/CNAME')) ? '/' : '/DolphinPhotos/',
   plugins: [
     react(),
     tailwindcss(),
