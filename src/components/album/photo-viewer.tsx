@@ -155,7 +155,9 @@ function ViewerBody({
   }, [index, photos])
 
   // Fit the photo into the stage between the chrome bars.
-  const pad = vp.w < 640 ? 0 : 24
+  const phone = vp.w < 640
+  const pressAt = useRef<{ x: number; y: number } | null>(null)
+  const pad = phone ? 0 : 24
   const stageW = vp.w - pad * 2
   const stageH = vp.h - CHROME_H * 2 - pad
   const ratio = photo.full.width / photo.full.height
@@ -280,6 +282,15 @@ function ViewerBody({
             dragSnapToOrigin
             dragElastic={0.6}
             onDragEnd={onDragEnd}
+            // Phones: tap the right half for the next photo, the left half to go
+            // back. A press that travelled is a swipe, not a tap.
+            onPointerDown={(e) => (pressAt.current = { x: e.clientX, y: e.clientY })}
+            onClick={(e) => {
+              const from = pressAt.current
+              if (!phone || photos.length < 2 || !from) return
+              if (Math.hypot(e.clientX - from.x, e.clientY - from.y) > 10) return
+              go(e.clientX < vp.w / 2 ? -1 : 1)
+            }}
             className="pointer-events-auto relative cursor-grab overflow-hidden bg-[#eeeef1] active:cursor-grabbing"
             style={{ width: fitW, height: fitH }}
           >
