@@ -44,14 +44,18 @@ export function useLottieBurst({ asset, size, origin, randomize }: BurstOptions)
     return a
   }, [])
 
-  // Fixed bursts are mounted ahead of time, as soon as their data arrives.
+  // Fixed bursts are mounted ahead of time, as soon as their data arrives —
+  // unless a tap got there first and already mounted (and is playing) it.
   useEffect(() => {
-    if (!randomize && lottie && data) load(lottie, data, false)
-    return () => {
+    if (!randomize && lottie && data && !anim.current) load(lottie, data, false)
+  }, [lottie, data, randomize, load])
+  useEffect(
+    () => () => {
       anim.current?.destroy()
       anim.current = null
-    }
-  }, [lottie, data, randomize, load])
+    },
+    [],
+  )
 
   const play = useCallback(
     (e: MouseEvent<HTMLElement>) => {
