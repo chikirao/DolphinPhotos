@@ -27,15 +27,6 @@
     "height": 1920
   },
   {
-    "file": "drop-img_4822.webp",
-    "source": "IMG_4822.HEIC",
-    "group": "Dolphin looks",
-    "emphasis": "normal",
-    "alt": "Dolphin looks",
-    "width": 2560,
-    "height": 1920
-  },
-  {
     "file": "drop-img_4882.webp",
     "source": "IMG_4882.HEIC",
     "group": "Dolphin looks",
@@ -81,15 +72,6 @@
     "height": 1920
   },
   {
-    "file": "drop-img_4925.webp",
-    "source": "IMG_4925.HEIC",
-    "group": "Brick courtyard",
-    "emphasis": "normal",
-    "alt": "Brick courtyard",
-    "width": 1920,
-    "height": 2560
-  },
-  {
     "file": "drop-img_5580.webp",
     "source": "IMG_5580.PNG",
     "group": "Portraits",
@@ -117,15 +99,6 @@
     "height": 1920
   },
   {
-    "file": "drop-img_5038.webp",
-    "source": "IMG_5038.HEIC",
-    "group": "Brick courtyard",
-    "emphasis": "normal",
-    "alt": "Brick courtyard",
-    "width": 2560,
-    "height": 1920
-  },
-  {
     "file": "drop-img_5042.webp",
     "source": "IMG_5042.HEIC",
     "group": "Brick courtyard",
@@ -142,15 +115,6 @@
     "alt": "Brick courtyard",
     "width": 1920,
     "height": 2560
-  },
-  {
-    "file": "drop-img_5101.webp",
-    "source": "IMG_5101.HEIC",
-    "group": "Brick courtyard",
-    "emphasis": "normal",
-    "alt": "Brick courtyard",
-    "width": 2560,
-    "height": 1920
   },
   {
     "file": "drop-img_5579.webp",
@@ -178,24 +142,6 @@
     "alt": "Dolphin looks",
     "width": 2560,
     "height": 1920
-  },
-  {
-    "file": "drop-img_5297.webp",
-    "source": "IMG_5297.HEIC",
-    "group": "Dolphin looks",
-    "emphasis": "normal",
-    "alt": "Dolphin looks",
-    "width": 2560,
-    "height": 1920
-  },
-  {
-    "file": "drop-img_4800.webp",
-    "source": "IMG_4800.HEIC",
-    "group": "Dolphin looks",
-    "emphasis": "normal",
-    "alt": "Dolphin looks",
-    "width": 1920,
-    "height": 2560
   },
   {
     "file": "drop-img_5723.webp",
@@ -286,15 +232,6 @@
     "alt": "Making Dolphin",
     "width": 2560,
     "height": 1920
-  },
-  {
-    "file": "drop-img_4018.webp",
-    "source": "IMG_4018.PNG",
-    "group": "Making Dolphin",
-    "emphasis": "normal",
-    "alt": "Making Dolphin",
-    "width": 1920,
-    "height": 2560
   },
   {
     "file": "drop-img_4019.webp",
@@ -396,15 +333,6 @@
     "height": 2560
   },
   {
-    "file": "drop-img_6340.webp",
-    "source": "IMG_6340.HEIC",
-    "group": "Water studies",
-    "emphasis": "normal",
-    "alt": "Water studies",
-    "width": 2560,
-    "height": 1920
-  },
-  {
     "file": "drop-img_6415.webp",
     "source": "IMG_6415.PNG",
     "group": "Water studies",
@@ -441,71 +369,8 @@
     "height": 2048
   },
   {
-    "file": "drop-img_8694.webp",
-    "source": "IMG_8694.JPEG",
-    "group": "Yellow pipes",
-    "emphasis": "normal",
-    "alt": "Yellow pipes",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8695.webp",
-    "source": "IMG_8695.JPEG",
-    "group": "Yellow pipes",
-    "emphasis": "normal",
-    "alt": "Yellow pipes",
-    "width": 2048,
-    "height": 1536
-  },
-  {
     "file": "drop-img_8696.webp",
     "source": "IMG_8696.JPEG",
-    "group": "Yellow pipes",
-    "emphasis": "normal",
-    "alt": "Yellow pipes",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8697.webp",
-    "source": "IMG_8697.JPEG",
-    "group": "Yellow pipes",
-    "emphasis": "normal",
-    "alt": "Yellow pipes",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8698.webp",
-    "source": "IMG_8698.JPEG",
-    "group": "Yellow pipes",
-    "emphasis": "normal",
-    "alt": "Yellow pipes",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8699.webp",
-    "source": "IMG_8699.JPEG",
-    "group": "Yellow pipes",
-    "emphasis": "normal",
-    "alt": "Yellow pipes",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8700.webp",
-    "source": "IMG_8700.JPEG",
-    "group": "Yellow pipes",
-    "emphasis": "normal",
-    "alt": "Yellow pipes",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8701.webp",
-    "source": "IMG_8701.JPEG",
     "group": "Yellow pipes",
     "emphasis": "normal",
     "alt": "Yellow pipes",
@@ -545,136 +410,10 @@
     "height": 1536
   },
   {
-    "file": "drop-img_8703.webp",
-    "source": "IMG_8703.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
-    "alt": "Walking together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8704.webp",
-    "source": "IMG_8704.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
-    "alt": "Walking together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8705.webp",
-    "source": "IMG_8705.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
-    "alt": "Walking together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8706.webp",
-    "source": "IMG_8706.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
-    "alt": "Walking together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8707.webp",
-    "source": "IMG_8707.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
-    "alt": "Walking together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8708.webp",
-    "source": "IMG_8708.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
-    "alt": "Walking together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
     "file": "drop-img_8709.webp",
     "source": "IMG_8709.JPEG",
     "group": "Walking together",
     "emphasis": "feature",
-    "alt": "Walking together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8710.webp",
-    "source": "IMG_8710.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
-    "alt": "Walking together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8711.webp",
-    "source": "IMG_8711.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
-    "alt": "Walking together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8712.webp",
-    "source": "IMG_8712.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
-    "alt": "Walking together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8713.webp",
-    "source": "IMG_8713.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
-    "alt": "Walking together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8714.webp",
-    "source": "IMG_8714.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
-    "alt": "Walking together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8715.webp",
-    "source": "IMG_8715.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
-    "alt": "Walking together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8716.webp",
-    "source": "IMG_8716.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
-    "alt": "Walking together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8717.webp",
-    "source": "IMG_8717.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
     "alt": "Walking together",
     "width": 2048,
     "height": 1536
@@ -687,24 +426,6 @@
     "alt": "Walking together",
     "width": 2048,
     "height": 1536
-  },
-  {
-    "file": "drop-img_8719.webp",
-    "source": "IMG_8719.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
-    "alt": "Walking together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8720.webp",
-    "source": "IMG_8720.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
-    "alt": "Walking together",
-    "width": 2418,
-    "height": 1298
   },
   {
     "file": "drop-reference-02.webp",
@@ -739,15 +460,6 @@
     "height": 1536
   },
   {
-    "file": "drop-img_8725.webp",
-    "source": "IMG_8725.JPEG",
-    "group": "Silver bag",
-    "emphasis": "normal",
-    "alt": "Silver bag",
-    "width": 2048,
-    "height": 1536
-  },
-  {
     "file": "drop-img_8726.webp",
     "source": "IMG_8726.JPEG",
     "group": "Silver bag",
@@ -757,35 +469,8 @@
     "height": 1536
   },
   {
-    "file": "drop-img_8727.webp",
-    "source": "IMG_8727.JPEG",
-    "group": "Silver bag",
-    "emphasis": "normal",
-    "alt": "Silver bag",
-    "width": 2048,
-    "height": 1536
-  },
-  {
     "file": "drop-img_8728.webp",
     "source": "IMG_8728.JPEG",
-    "group": "Silver bag",
-    "emphasis": "normal",
-    "alt": "Silver bag",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8729.webp",
-    "source": "IMG_8729.JPEG",
-    "group": "Silver bag",
-    "emphasis": "normal",
-    "alt": "Silver bag",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8730.webp",
-    "source": "IMG_8730.JPEG",
     "group": "Silver bag",
     "emphasis": "normal",
     "alt": "Silver bag",
@@ -818,47 +503,11 @@
     "height": 1536
   },
   {
-    "file": "drop-img_8736.webp",
-    "source": "IMG_8736.JPEG",
-    "group": "Mint hood",
-    "emphasis": "normal",
-    "alt": "Mint hood",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8737.webp",
-    "source": "IMG_8737.JPEG",
-    "group": "Mint hood",
-    "emphasis": "normal",
-    "alt": "Mint hood",
-    "width": 2048,
-    "height": 1536
-  },
-  {
     "file": "clip-img_8738.mp4",
     "source": "IMG_8738.MP4",
     "group": "Mint hood in motion",
     "emphasis": "feature",
     "alt": "Mint hood in motion"
-  },
-  {
-    "file": "drop-img_8739.webp",
-    "source": "IMG_8739.JPEG",
-    "group": "Mint hood",
-    "emphasis": "normal",
-    "alt": "Mint hood",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8740.webp",
-    "source": "IMG_8740.JPEG",
-    "group": "Mint hood",
-    "emphasis": "normal",
-    "alt": "Mint hood",
-    "width": 2048,
-    "height": 1536
   },
   {
     "file": "demo-05.jpg",
@@ -877,55 +526,10 @@
     "height": 2048
   },
   {
-    "file": "drop-img_8742.webp",
-    "source": "IMG_8742.JPEG",
-    "group": "Silver look",
-    "emphasis": "normal",
-    "alt": "Silver look",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8743.webp",
-    "source": "IMG_8743.JPEG",
-    "group": "Silver look",
-    "emphasis": "normal",
-    "alt": "Silver look",
-    "width": 1536,
-    "height": 2048
-  },
-  {
     "file": "drop-img_8744.webp",
     "source": "IMG_8744.JPEG",
     "group": "Silver look",
     "emphasis": "feature",
-    "alt": "Silver look",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8745.webp",
-    "source": "IMG_8745.JPEG",
-    "group": "Silver look",
-    "emphasis": "normal",
-    "alt": "Silver look",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8746.webp",
-    "source": "IMG_8746.JPEG",
-    "group": "Silver look",
-    "emphasis": "normal",
-    "alt": "Silver look",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8747.webp",
-    "source": "IMG_8747.JPEG",
-    "group": "Silver look",
-    "emphasis": "normal",
     "alt": "Silver look",
     "width": 1536,
     "height": 2048
@@ -970,42 +574,6 @@
     "height": 1536
   },
   {
-    "file": "drop-img_8750.webp",
-    "source": "IMG_8750.JPEG",
-    "group": "Blue ground",
-    "emphasis": "normal",
-    "alt": "Blue ground",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8751.webp",
-    "source": "IMG_8751.JPEG",
-    "group": "Blue ground",
-    "emphasis": "normal",
-    "alt": "Blue ground",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8752.webp",
-    "source": "IMG_8752.JPEG",
-    "group": "Blue ground",
-    "emphasis": "normal",
-    "alt": "Blue ground",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8753.webp",
-    "source": "IMG_8753.JPEG",
-    "group": "Blue ground",
-    "emphasis": "feature",
-    "alt": "Blue ground",
-    "width": 2048,
-    "height": 1536
-  },
-  {
     "file": "clip-img_8754.mp4",
     "source": "IMG_8754.MP4",
     "group": "Blue ground in motion",
@@ -1015,24 +583,6 @@
   {
     "file": "drop-img_8755.webp",
     "source": "IMG_8755.JPEG",
-    "group": "Blue ground",
-    "emphasis": "normal",
-    "alt": "Blue ground",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8756.webp",
-    "source": "IMG_8756.JPEG",
-    "group": "Blue ground",
-    "emphasis": "normal",
-    "alt": "Blue ground",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8757.webp",
-    "source": "IMG_8757.JPEG",
     "group": "Blue ground",
     "emphasis": "normal",
     "alt": "Blue ground",
@@ -1063,15 +613,6 @@
     "alt": "The courtyard / mint hood",
     "width": 2048,
     "height": 1536
-  },
-  {
-    "file": "drop-reference-59.webp",
-    "source": "Снимок экрана — 2026-11-04 в 12.54.14.png",
-    "group": "Dolphin references",
-    "emphasis": "normal",
-    "alt": "Dolphin references",
-    "width": 979,
-    "height": 651
   },
   {
     "file": "demo-09.jpg",
@@ -1115,91 +656,10 @@
     "height": 1536
   },
   {
-    "file": "drop-img_8802.webp",
-    "source": "IMG_8802.JPEG",
-    "group": "On the steps",
-    "emphasis": "normal",
-    "alt": "On the steps",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8803.webp",
-    "source": "IMG_8803.JPEG",
-    "group": "On the steps",
-    "emphasis": "normal",
-    "alt": "On the steps",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8804.webp",
-    "source": "IMG_8804.JPEG",
-    "group": "On the steps",
-    "emphasis": "normal",
-    "alt": "On the steps",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8805.webp",
-    "source": "IMG_8805.JPEG",
-    "group": "On the steps",
-    "emphasis": "normal",
-    "alt": "On the steps",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8806.webp",
-    "source": "IMG_8806.JPEG",
-    "group": "On the steps",
-    "emphasis": "normal",
-    "alt": "On the steps",
-    "width": 2048,
-    "height": 1536
-  },
-  {
     "file": "drop-img_8807.webp",
     "source": "IMG_8807.JPEG",
     "group": "On the steps",
     "emphasis": "feature",
-    "alt": "On the steps",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8808.webp",
-    "source": "IMG_8808.JPEG",
-    "group": "On the steps",
-    "emphasis": "normal",
-    "alt": "On the steps",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8809.webp",
-    "source": "IMG_8809.JPEG",
-    "group": "On the steps",
-    "emphasis": "normal",
-    "alt": "On the steps",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8810.webp",
-    "source": "IMG_8810.JPEG",
-    "group": "On the steps",
-    "emphasis": "normal",
-    "alt": "On the steps",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8811.webp",
-    "source": "IMG_8811.JPEG",
-    "group": "On the steps",
-    "emphasis": "normal",
     "alt": "On the steps",
     "width": 2048,
     "height": 1536
@@ -1212,24 +672,6 @@
     "alt": "On the steps",
     "width": 1536,
     "height": 2048
-  },
-  {
-    "file": "drop-img_8813.webp",
-    "source": "IMG_8813.JPEG",
-    "group": "On the steps",
-    "emphasis": "normal",
-    "alt": "On the steps",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8814.webp",
-    "source": "IMG_8814.JPEG",
-    "group": "On the steps",
-    "emphasis": "normal",
-    "alt": "On the steps",
-    "width": 2048,
-    "height": 1536
   },
   {
     "file": "demo-11.jpg",
@@ -1357,154 +799,10 @@
     "alt": "Water"
   },
   {
-    "file": "drop-img_8868.webp",
-    "source": "IMG_8868.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8869.webp",
-    "source": "IMG_8869.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8870.webp",
-    "source": "IMG_8870.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8871.webp",
-    "source": "IMG_8871.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8872.webp",
-    "source": "IMG_8872.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
     "file": "drop-img_8873.webp",
     "source": "IMG_8873.JPEG",
     "group": "The blue ocean / together",
     "emphasis": "feature",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8874.webp",
-    "source": "IMG_8874.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8875.webp",
-    "source": "IMG_8875.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8876.webp",
-    "source": "IMG_8876.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8877.webp",
-    "source": "IMG_8877.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8878.webp",
-    "source": "IMG_8878.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8879.webp",
-    "source": "IMG_8879.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8880.webp",
-    "source": "IMG_8880.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8881.webp",
-    "source": "IMG_8881.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8882.webp",
-    "source": "IMG_8882.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8883.webp",
-    "source": "IMG_8883.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8884.webp",
-    "source": "IMG_8884.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
     "alt": "The blue ocean / together",
     "width": 2048,
     "height": 1536
@@ -1517,163 +815,10 @@
     "alt": "Water"
   },
   {
-    "file": "drop-img_8885.webp",
-    "source": "IMG_8885.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8886.webp",
-    "source": "IMG_8886.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8887.webp",
-    "source": "IMG_8887.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8888.webp",
-    "source": "IMG_8888.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8889.webp",
-    "source": "IMG_8889.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8890.webp",
-    "source": "IMG_8890.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8891.webp",
-    "source": "IMG_8891.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8892.webp",
-    "source": "IMG_8892.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8893.webp",
-    "source": "IMG_8893.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8894.webp",
-    "source": "IMG_8894.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8895.webp",
-    "source": "IMG_8895.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8896.webp",
-    "source": "IMG_8896.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8897.webp",
-    "source": "IMG_8897.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
     "file": "drop-img_8898.webp",
     "source": "IMG_8898.JPEG",
     "group": "The blue ocean / together",
     "emphasis": "feature",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8899.webp",
-    "source": "IMG_8899.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8900.webp",
-    "source": "IMG_8900.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8901.webp",
-    "source": "IMG_8901.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
-    "alt": "The blue ocean / together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8902.webp",
-    "source": "IMG_8902.JPEG",
-    "group": "The blue ocean / together",
-    "emphasis": "normal",
     "alt": "The blue ocean / together",
     "width": 2048,
     "height": 1536
@@ -1695,24 +840,6 @@
     "alt": "Water"
   },
   {
-    "file": "drop-img_8903.webp",
-    "source": "IMG_8903.JPEG",
-    "group": "The blue ocean / overhead",
-    "emphasis": "normal",
-    "alt": "The blue ocean / overhead",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8904.webp",
-    "source": "IMG_8904.JPEG",
-    "group": "The blue ocean / overhead",
-    "emphasis": "normal",
-    "alt": "The blue ocean / overhead",
-    "width": 2048,
-    "height": 1536
-  },
-  {
     "file": "drop-img_8905.webp",
     "source": "IMG_8905.JPEG",
     "group": "The blue ocean / overhead",
@@ -1722,78 +849,6 @@
     "height": 1536
   },
   {
-    "file": "drop-img_8906.webp",
-    "source": "IMG_8906.JPEG",
-    "group": "The blue ocean / overhead",
-    "emphasis": "normal",
-    "alt": "The blue ocean / overhead",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8907.webp",
-    "source": "IMG_8907.JPEG",
-    "group": "The blue ocean / overhead",
-    "emphasis": "normal",
-    "alt": "The blue ocean / overhead",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8908.webp",
-    "source": "IMG_8908.JPEG",
-    "group": "The blue ocean / overhead",
-    "emphasis": "normal",
-    "alt": "The blue ocean / overhead",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8909.webp",
-    "source": "IMG_8909.JPEG",
-    "group": "The blue ocean / overhead",
-    "emphasis": "normal",
-    "alt": "The blue ocean / overhead",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8910.webp",
-    "source": "IMG_8910.JPEG",
-    "group": "The blue ocean / overhead",
-    "emphasis": "normal",
-    "alt": "The blue ocean / overhead",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8911.webp",
-    "source": "IMG_8911.JPEG",
-    "group": "The blue ocean / overhead",
-    "emphasis": "normal",
-    "alt": "The blue ocean / overhead",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8912.webp",
-    "source": "IMG_8912.JPEG",
-    "group": "The blue ocean / overhead",
-    "emphasis": "normal",
-    "alt": "The blue ocean / overhead",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8913.webp",
-    "source": "IMG_8913.JPEG",
-    "group": "The blue ocean / overhead",
-    "emphasis": "normal",
-    "alt": "The blue ocean / overhead",
-    "width": 1536,
-    "height": 2048
-  },
-  {
     "file": "demo-20.jpg",
     "source": "demo-20.jpg",
     "group": "Water",
@@ -1801,71 +856,8 @@
     "alt": "Water"
   },
   {
-    "file": "drop-img_8914.webp",
-    "source": "IMG_8914.JPEG",
-    "group": "Ocean dress",
-    "emphasis": "normal",
-    "alt": "Ocean dress",
-    "width": 1536,
-    "height": 2048
-  },
-  {
     "file": "drop-img_8915.webp",
     "source": "IMG_8915.JPEG",
-    "group": "Ocean dress",
-    "emphasis": "normal",
-    "alt": "Ocean dress",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8916.webp",
-    "source": "IMG_8916.JPEG",
-    "group": "Ocean dress",
-    "emphasis": "normal",
-    "alt": "Ocean dress",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8917.webp",
-    "source": "IMG_8917.JPEG",
-    "group": "Ocean dress",
-    "emphasis": "normal",
-    "alt": "Ocean dress",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8918.webp",
-    "source": "IMG_8918.JPEG",
-    "group": "Ocean dress",
-    "emphasis": "normal",
-    "alt": "Ocean dress",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8919.webp",
-    "source": "IMG_8919.JPEG",
-    "group": "Ocean dress",
-    "emphasis": "normal",
-    "alt": "Ocean dress",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8920.webp",
-    "source": "IMG_8920.JPEG",
-    "group": "Ocean dress",
-    "emphasis": "normal",
-    "alt": "Ocean dress",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8921.webp",
-    "source": "IMG_8921.JPEG",
     "group": "Ocean dress",
     "emphasis": "normal",
     "alt": "Ocean dress",
@@ -1882,173 +874,11 @@
     "height": 2048
   },
   {
-    "file": "drop-img_8923.webp",
-    "source": "IMG_8923.JPEG",
-    "group": "Ocean dress",
-    "emphasis": "normal",
-    "alt": "Ocean dress",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8924.webp",
-    "source": "IMG_8924.JPEG",
-    "group": "Ocean dress",
-    "emphasis": "normal",
-    "alt": "Ocean dress",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8925.webp",
-    "source": "IMG_8925.JPEG",
-    "group": "Ocean dress",
-    "emphasis": "normal",
-    "alt": "Ocean dress",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8926.webp",
-    "source": "IMG_8926.JPEG",
-    "group": "Ocean dress",
-    "emphasis": "normal",
-    "alt": "Ocean dress",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8927.webp",
-    "source": "IMG_8927.JPEG",
-    "group": "Ocean dress",
-    "emphasis": "normal",
-    "alt": "Ocean dress",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8928.webp",
-    "source": "IMG_8928.JPEG",
-    "group": "Ocean dress",
-    "emphasis": "normal",
-    "alt": "Ocean dress",
-    "width": 2048,
-    "height": 1536
-  },
-  {
     "file": "demo-21.jpg",
     "source": "demo-21.jpg",
     "group": "Water",
     "emphasis": "normal",
     "alt": "Water"
-  },
-  {
-    "file": "drop-img_8929.webp",
-    "source": "IMG_8929.JPEG",
-    "group": "Ocean dress / movement",
-    "emphasis": "normal",
-    "alt": "Ocean dress / movement",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8930.webp",
-    "source": "IMG_8930.JPEG",
-    "group": "Ocean dress / movement",
-    "emphasis": "normal",
-    "alt": "Ocean dress / movement",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8931.webp",
-    "source": "IMG_8931.JPEG",
-    "group": "Ocean dress / movement",
-    "emphasis": "normal",
-    "alt": "Ocean dress / movement",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8932.webp",
-    "source": "IMG_8932.JPEG",
-    "group": "Ocean dress / movement",
-    "emphasis": "normal",
-    "alt": "Ocean dress / movement",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8933.webp",
-    "source": "IMG_8933.JPEG",
-    "group": "Ocean dress / movement",
-    "emphasis": "normal",
-    "alt": "Ocean dress / movement",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8934.webp",
-    "source": "IMG_8934.JPEG",
-    "group": "Ocean dress / movement",
-    "emphasis": "normal",
-    "alt": "Ocean dress / movement",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8935.webp",
-    "source": "IMG_8935.JPEG",
-    "group": "Ocean dress / movement",
-    "emphasis": "feature",
-    "alt": "Ocean dress / movement",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8936.webp",
-    "source": "IMG_8936.JPEG",
-    "group": "Ocean dress / movement",
-    "emphasis": "normal",
-    "alt": "Ocean dress / movement",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8937.webp",
-    "source": "IMG_8937.JPEG",
-    "group": "Ocean dress / movement",
-    "emphasis": "normal",
-    "alt": "Ocean dress / movement",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8938.webp",
-    "source": "IMG_8938.JPEG",
-    "group": "Ocean dress / movement",
-    "emphasis": "normal",
-    "alt": "Ocean dress / movement",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8939.webp",
-    "source": "IMG_8939.JPEG",
-    "group": "Ocean dress / movement",
-    "emphasis": "normal",
-    "alt": "Ocean dress / movement",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8940.webp",
-    "source": "IMG_8940.JPEG",
-    "group": "Ocean dress / movement",
-    "emphasis": "normal",
-    "alt": "Ocean dress / movement",
-    "width": 2048,
-    "height": 1536
   },
   {
     "file": "drop-reference-10.webp",
@@ -2067,69 +897,6 @@
     "alt": "Water"
   },
   {
-    "file": "drop-img_8941.webp",
-    "source": "IMG_8941.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8942.webp",
-    "source": "IMG_8942.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8943.webp",
-    "source": "IMG_8943.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8944.webp",
-    "source": "IMG_8944.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8945.webp",
-    "source": "IMG_8945.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8946.webp",
-    "source": "IMG_8946.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8947.webp",
-    "source": "IMG_8947.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
     "file": "drop-img_8948.webp",
     "source": "IMG_8948.JPEG",
     "group": "Back in the street",
@@ -2139,71 +906,8 @@
     "height": 2048
   },
   {
-    "file": "drop-img_8949.webp",
-    "source": "IMG_8949.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8950.webp",
-    "source": "IMG_8950.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8951.webp",
-    "source": "IMG_8951.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
     "file": "drop-img_8952.webp",
     "source": "IMG_8952.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8953.webp",
-    "source": "IMG_8953.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8954.webp",
-    "source": "IMG_8954.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8955.webp",
-    "source": "IMG_8955.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8956.webp",
-    "source": "IMG_8956.JPEG",
     "group": "Back in the street",
     "emphasis": "normal",
     "alt": "Back in the street",
@@ -2218,42 +922,6 @@
     "alt": "Water"
   },
   {
-    "file": "drop-img_8957.webp",
-    "source": "IMG_8957.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8958.webp",
-    "source": "IMG_8958.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8959.webp",
-    "source": "IMG_8959.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8960.webp",
-    "source": "IMG_8960.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
     "file": "drop-img_8961.webp",
     "source": "IMG_8961.JPEG",
     "group": "Back in the street",
@@ -2261,42 +929,6 @@
     "alt": "Back in the street",
     "width": 2048,
     "height": 1536
-  },
-  {
-    "file": "drop-img_8962.webp",
-    "source": "IMG_8962.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8963.webp",
-    "source": "IMG_8963.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8964.webp",
-    "source": "IMG_8964.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8965.webp",
-    "source": "IMG_8965.JPEG",
-    "group": "Back in the street",
-    "emphasis": "normal",
-    "alt": "Back in the street",
-    "width": 1536,
-    "height": 2048
   },
   {
     "file": "drop-reference-58.webp",
@@ -2324,37 +956,10 @@
     "height": 2048
   },
   {
-    "file": "drop-img_8967.webp",
-    "source": "IMG_8967.JPEG",
-    "group": "Ocean hood",
-    "emphasis": "normal",
-    "alt": "Ocean hood",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8968.webp",
-    "source": "IMG_8968.JPEG",
-    "group": "Ocean hood",
-    "emphasis": "normal",
-    "alt": "Ocean hood",
-    "width": 1536,
-    "height": 2048
-  },
-  {
     "file": "drop-img_8969.webp",
     "source": "IMG_8969.JPEG",
     "group": "Ocean hood",
     "emphasis": "feature",
-    "alt": "Ocean hood",
-    "width": 1536,
-    "height": 2048
-  },
-  {
-    "file": "drop-img_8970.webp",
-    "source": "IMG_8970.JPEG",
-    "group": "Ocean hood",
-    "emphasis": "normal",
     "alt": "Ocean hood",
     "width": 1536,
     "height": 2048
@@ -2369,13 +974,6 @@
   {
     "file": "demo-29.jpg",
     "source": "demo-29.jpg",
-    "group": "Water",
-    "emphasis": "normal",
-    "alt": "Water"
-  },
-  {
-    "file": "demo-30.jpg",
-    "source": "demo-30.jpg",
     "group": "Water",
     "emphasis": "normal",
     "alt": "Water"
