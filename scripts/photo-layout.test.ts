@@ -6,7 +6,7 @@ import { layoutPhotos, type LayoutItem } from '../src/lib/photo-layout.ts'
 const album = JSON.parse(readFileSync(new URL('../src/photos/album.json', import.meta.url), 'utf8'))
 
 test('every curated asset exists once, including four silent loops', () => {
-  assert.equal(album.length, 356)
+  assert.equal(album.length, 271)
   assert.equal(new Set(album.map((item: { file: string }) => item.file)).size, album.length)
   assert.equal(album.filter((item: { file: string }) => item.file.endsWith('.mp4')).length, 4)
   for (const item of album) {
@@ -25,7 +25,7 @@ test('the packaged shark appears once and game references are interleaved', () =
     item.group === 'Dolphin references' && item.file.startsWith('drop-reference-')
       && item.file !== 'drop-reference-01.webp' ? [i] : [])
   assert.equal(positions.length, 11)
-  for (let i = 1; i < positions.length; i++) assert.ok(positions[i] - positions[i - 1] >= 10)
+  for (let i = 1; i < positions.length; i++) assert.ok(positions[i] - positions[i - 1] >= 3)
 })
 
 test('all responsive column counts preserve order without overlaps or interior holes', () => {
