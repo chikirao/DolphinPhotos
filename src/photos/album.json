@@ -180,6 +180,13 @@
     "height": 1920
   },
   {
+    "file": "clip-img_5792.mp4",
+    "source": "IMG_5792.MOV",
+    "group": "Dolphin bags in motion",
+    "emphasis": "feature",
+    "alt": "Lime Dolphin drawstring bag in motion"
+  },
+  {
     "file": "drop-img_5769.webp",
     "source": "IMG_5769.HEIC",
     "group": "Making Dolphin",
@@ -187,6 +194,13 @@
     "alt": "Making Dolphin",
     "width": 2560,
     "height": 1919
+  },
+  {
+    "file": "clip-img_5812.mp4",
+    "source": "IMG_5812.MOV",
+    "group": "Dolphin bags in motion",
+    "emphasis": "feature",
+    "alt": "Silver Dolphin drawstring bag in motion"
   },
   {
     "file": "drop-img_6130.webp",

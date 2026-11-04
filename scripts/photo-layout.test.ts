@@ -5,10 +5,10 @@ import { layoutPhotos, type LayoutItem } from '../src/lib/photo-layout.ts'
 
 const album = JSON.parse(readFileSync(new URL('../src/photos/album.json', import.meta.url), 'utf8'))
 
-test('every curated asset exists once, including four silent loops', () => {
-  assert.equal(album.length, 115)
+test('every curated asset exists once, including six silent loops', () => {
+  assert.equal(album.length, 117)
   assert.equal(new Set(album.map((item: { file: string }) => item.file)).size, album.length)
-  assert.equal(album.filter((item: { file: string }) => item.file.endsWith('.mp4')).length, 4)
+  assert.equal(album.filter((item: { file: string }) => item.file.endsWith('.mp4')).length, 6)
   for (const item of album) {
     const video = item.file.endsWith('.mp4')
     assert.ok(existsSync(new URL(`../src/${video ? 'videos' : 'photos'}/${item.file}`, import.meta.url)), item.file)
