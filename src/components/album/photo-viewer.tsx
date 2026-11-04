@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, type PanInfo } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion, type PanInfo } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Download, Pause, Play, Volume2, VolumeX, X } from 'lucide-react'
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
@@ -8,6 +8,7 @@ import { downloadPhoto } from '@/lib/download-album'
 import type { Photo } from '@/lib/photos'
 import { spring } from '@/lib/springs'
 import { soundtrack } from '@/config'
+import { clearPhotoPreloads, preloadPhoto } from '@/lib/preload-photo'
 
 /** Slideshow soundtrack: every mp3 in src/assets/audio, credited from config. */
 const TRACKS = Object.entries(
@@ -17,8 +18,6 @@ const TRACKS = Object.entries(
   return { src, ...(soundtrack[file] ?? { title: file, artist: '' }) }
 })
 const SLIDESHOW_MS = 3500
-/** Slideshow steps dissolve slowly into each other. */
-const CROSSFADE = { type: 'spring' as const, duration: 1.1, bounce: 0 }
 
 type Step = { d: number; fade: boolean }
 const CHROME_H = 56
@@ -73,12 +72,21 @@ function ViewerBody({
   onClose,
 }: PhotoViewerProps & { index: number }) {
   const photo = photos[index]
+  const reduced = useReducedMotion()
   const vp = useViewport()
   // Direction of the last step: the incoming photo slides in from that side.
   // 0 means "just opened" — the photo flies out of its grid tile instead.
   const [direction, setDirection] = useState(0)
   const step: Step = { d: direction, fade: playing }
   const [fullLoaded, setFullLoaded] = useState<Record<string, boolean>>({})
+  const [readyId, setReadyId] = useState<string | null>(null)
+  const [pageVisible, setPageVisible] = useState(!document.hidden)
+
+  useEffect(() => {
+    const sync = () => setPageVisible(!document.hidden)
+    document.addEventListener('visibilitychange', sync)
+    return () => document.removeEventListener('visibilitychange', sync)
+  }, [])
 
   const go = useCallback(
     (delta: number) => {
@@ -103,10 +111,15 @@ function ViewerBody({
   }, [go, onClose, onPlayingChange, playing])
 
   useEffect(() => {
-    if (!playing) return
-    const t = setTimeout(() => go(1), SLIDESHOW_MS)
-    return () => clearTimeout(t)
-  }, [playing, index, go])
+    if (!playing || !pageVisible || readyId !== photo.id) return
+    let cancelled = false
+    const t = setTimeout(() => {
+      // If a slow connection outruns the look-ahead, keep the current frame
+      // until the next is decoded. Failed media still has its preview fallback.
+      preloadPhoto(photos[(index + 1) % photos.length]).then(() => { if (!cancelled) go(1) })
+    }, SLIDESHOW_MS)
+    return () => { cancelled = true; clearTimeout(t) }
+  }, [playing, pageVisible, readyId, photo.id, index, photos, go])
 
   // The slideshow has a soundtrack: it plays while the slideshow runs. Each
   // viewer session starts on a random track and then goes through the list.
@@ -125,11 +138,12 @@ function ViewerBody({
   useEffect(() => {
     const a = audio.current
     if (!a) return
-    const src = TRACKS[track].src
-    if (!a.src.endsWith(src)) a.src = src
-    if (playing) a.play().catch(() => {})
+    const src = TRACKS[track]?.src
+    if (!src) return
+    if (a.src !== new URL(src, location.href).href) a.src = src
+    if (playing && pageVisible) a.play().catch(() => {})
     else a.pause()
-  }, [playing, track])
+  }, [playing, pageVisible, track])
   useEffect(() => {
     if (audio.current) audio.current.muted = muted
   }, [muted])
@@ -146,13 +160,21 @@ function ViewerBody({
     }
   }, [])
 
-  // Preload neighbours so stepping feels instant.
+  // Current + two ahead + one behind; release the working set when closed.
   useEffect(() => {
-    for (const d of [1, -1]) {
+    let cancelled = false
+    preloadPhoto(photo).then((ok) => {
+      if (cancelled) return
+      setReadyId(photo.id)
+      if (ok) setFullLoaded((s) => ({ ...s, [photo.id]: true }))
+    })
+    for (const d of [1, 2, -1]) {
       const p = photos[(index + d + photos.length) % photos.length]
-      new Image().src = p.full.src
+      void preloadPhoto(p)
     }
-  }, [index, photos])
+    return () => { cancelled = true }
+  }, [photo, index, photos])
+  useEffect(() => clearPhotoPreloads, [])
 
   // Fit the photo into the stage between the chrome bars.
   const phone = vp.w < 640
@@ -277,7 +299,7 @@ function ViewerBody({
             initial={direction === 0 ? false : 'enter'}
             animate="center"
             exit="exit"
-            transition={playing ? CROSSFADE : spring.slow}
+            transition={spring.slow}
             drag
             dragSnapToOrigin
             dragElastic={0.6}
@@ -300,16 +322,18 @@ function ViewerBody({
               draggable={false}
               className="absolute inset-0 size-full object-cover select-none"
             />
-            <motion.img
+            {photo.kind === 'video' ? (
+              <ViewerVideo photo={photo} active={pageVisible && !reduced} />
+            ) : <motion.img
               src={photo.full.src}
-              alt={photo.name}
+              alt={photo.alt}
               draggable={false}
               onLoad={() => setFullLoaded((s) => ({ ...s, [photo.id]: true }))}
               initial={false}
               animate={{ opacity: fullLoaded[photo.id] ? 1 : 0 }}
               transition={spring.slow}
               className="absolute inset-0 size-full object-cover select-none"
-            />
+            />}
           </motion.div>
         </AnimatePresence>
 
@@ -321,9 +345,23 @@ function ViewerBody({
         )}
       </div>
 
-      <AnimatePresence>{playing && <NowPlaying key="now-playing" {...TRACKS[track]} />}</AnimatePresence>
+      <AnimatePresence>{playing && TRACKS[track] && <NowPlaying key="now-playing" {...TRACKS[track]} />}</AnimatePresence>
     </motion.div>
   )
+}
+
+function ViewerVideo({ photo, active }: { photo: Photo; active: boolean }) {
+  const ref = useRef<HTMLVideoElement>(null)
+  useEffect(() => {
+    const video = ref.current
+    if (!video) return
+    if (active) video.play().catch(() => {})
+    else video.pause()
+    return () => video.pause()
+  }, [active])
+  return <video ref={ref} src={photo.video} poster={photo.thumb.src} autoPlay={active}
+    muted loop playsInline preload="auto" aria-label={photo.alt}
+    className="absolute inset-0 size-full object-cover" />
 }
 
 /** Quiet gray "Now Playing" line in the bottom-left corner while the

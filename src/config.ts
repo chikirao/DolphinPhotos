@@ -35,6 +35,11 @@ export const album = {
 
 /** Slideshow soundtrack credits, keyed by the mp3 file name in src/assets/audio. */
 export const soundtrack: Record<string, { title: string; artist: string }> = {
+  'Dylan Thom - Hope Over Everything': { title: 'Hope Over Everything', artist: 'Dylan Thom' },
+  'Dylan Thom - The Life': { title: 'The Life', artist: 'Dylan Thom' },
+  'Ecco2k - Sky Burial': { title: 'Sky Burial', artist: 'Ecco2k' },
+  'Over ft Postprosperity - Sacred Holes Postprosperity': { title: 'Over (feat. Postprosperity)', artist: 'Sacred Holes' },
+  'Roshina - Jenny s Paris': { title: "Jenny’s Paris", artist: 'Roshina' },
   'dylan-thom-if-youre-gonna-kill-me': { title: "If You're Gonna Kill Me", artist: 'Dylan Thom' },
   'liam-mc-cay-clear': { title: 'Clear (feat. Dylan Thom)', artist: 'Liam Mc Cay' },
   'sacred-holes-tiger': { title: 'Tiger', artist: 'Sacred Holes' },

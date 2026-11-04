@@ -1,148 +1,123 @@
-import { motion } from 'framer-motion'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { layoutPhotos } from '@/lib/photo-layout'
 import type { Photo } from '@/lib/photos'
 import { spring } from '@/lib/springs'
-import { cn } from '@/lib/utils'
+import { useMediaVisibility } from '@/lib/use-media-visibility'
 
-/** Target thumbnail box per zoom step; the grid fits as many columns as it can. */
 const BOX_SIZES = [96, 124, 156, 191, 250, 330]
-const GAP_X = 16
-const GAP_Y = 34
-/** Below this width the grid switches to iCloud's phone layout:
- *  three square columns, hairline gaps, edge to edge. */
-const MOBILE_MAX = 600
-const MOBILE_COLS = 3
-const MOBILE_GAP = 2
+const MOBILE_COLUMNS = [5, 4, 3, 3, 2, 2]
 
 interface PhotoGridProps {
   photos: Photo[]
   zoom: number
   square: boolean
-  /** Photo currently open in the viewer — its tile hands its image over. */
   activeId: string | null
+  paused: boolean
   onOpen: (photo: Photo) => void
 }
 
-function useWidth<T extends HTMLElement>() {
-  const ref = useRef<T>(null)
+export function PhotoGrid({ photos, zoom, square, activeId, paused, onOpen }: PhotoGridProps) {
+  const ref = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState(0)
+  const reduced = useReducedMotion()
   useLayoutEffect(() => {
-    const el = ref.current
-    if (!el) return
+    if (!ref.current) return
     const ro = new ResizeObserver(([entry]) => setWidth(entry.contentRect.width))
-    ro.observe(el)
+    ro.observe(ref.current)
     return () => ro.disconnect()
   }, [])
-  return [ref, width] as const
-}
-
-export function PhotoGrid({ photos, zoom, square, activeId, onOpen }: PhotoGridProps) {
-  const [ref, width] = useWidth<HTMLDivElement>()
-  const mobile = width > 0 && width < MOBILE_MAX
-  const target = BOX_SIZES[zoom]
-  const gapX = mobile ? MOBILE_GAP : GAP_X
-  const gapY = mobile ? MOBILE_GAP : GAP_Y
-  const cols = mobile ? MOBILE_COLS : Math.max(2, Math.round((width + gapX) / (target + gapX)))
-  const box = width ? (width - gapX * (cols - 1)) / cols : target
+  const mobile = width > 0 && width < 600
+  const gapX = mobile ? 2 : 16
+  const gapY = mobile ? 2 : 34
+  const cols = mobile ? MOBILE_COLUMNS[zoom] : Math.max(2, Math.round((width + gapX) / (BOX_SIZES[zoom] + gapX)))
+  const box = width ? Math.max(1, (width - gapX * (cols - 1)) / cols) : BOX_SIZES[zoom]
+  const placements = useMemo(() => layoutPhotos(photos, cols), [photos, cols])
 
   return (
-    <div ref={ref} className="mx-auto w-full max-w-[1440px] px-1.5 sm:px-6">
-      <div
-        className="grid"
-        style={{
-          gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-          columnGap: gapX,
-          rowGap: gapY,
-        }}
-      >
-        {photos.map((photo, i) => (
-          <PhotoTile
-            key={photo.id}
-            photo={photo}
-            box={box}
-            square={square || mobile}
-            hidden={photo.id === activeId}
-            index={i}
-            onOpen={onOpen}
-          />
-        ))}
+    <div className="mx-auto w-full max-w-[1440px] px-1.5 sm:px-6">
+      <div ref={ref} className="grid" style={{
+        gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+        gridAutoRows: box, columnGap: gapX, rowGap: gapY,
+      }}>
+        {photos.map((photo, index) => {
+          const place = placements[index]
+          return (
+            <PhotoTile key={photo.id} photo={photo}
+              width={place.columns * box + (place.columns - 1) * gapX}
+              height={place.rows * box + (place.rows - 1) * gapY}
+              placement={place} square={square || mobile} hidden={photo.id === activeId}
+              reduced={!!reduced} paused={paused} onOpen={onOpen} />
+          )
+        })}
       </div>
     </div>
   )
 }
 
-function PhotoTile({
-  photo,
-  box,
-  square,
-  hidden,
-  index,
-  onOpen,
-}: {
+function PhotoTile({ photo, width, height, placement, square, hidden, reduced, paused, onOpen }: {
   photo: Photo
-  box: number
+  width: number
+  height: number
+  placement: ReturnType<typeof layoutPhotos>[number]
   square: boolean
   hidden: boolean
-  index: number
+  reduced: boolean
+  paused: boolean
   onOpen: (photo: Photo) => void
 }) {
-  const [loaded, setLoaded] = useState(false)
-  const [morphed, setMorphed] = useState(false)
+  const { ref, near, visible } = useMediaVisibility()
   const ratio = photo.thumb.width / photo.thumb.height
-  // Like iCloud: every tile waits as a gray square; once its image is in, the
-  // square morphs to the photo's shape (fit mode) and the image fades in.
-  const fit = !square && loaded
-  const w = fit && ratio < 1 ? box * ratio : box
-  const h = fit && ratio > 1 ? box / ratio : box
-  const morphs = !square && Math.abs(ratio - 1) > 0.01
-  const shown = loaded && (!morphs || morphed)
-  // Fallback in case the morph never reports back (e.g. layout was skipped).
+  const w = square ? width : Math.min(width, height * ratio)
+  const h = square ? height : w / ratio
+  // Keep a measured footprint while decoded media far offscreen is released.
+  return (
+    <div ref={ref} data-photo-id={photo.id} data-emphasis={photo.emphasis} style={{
+      gridColumn: `${placement.column + 1} / span ${placement.columns}`,
+      gridRow: `${placement.row + 1} / span ${placement.rows}`,
+    }}>
+      <Button variant="ghost" aria-label={`Open ${photo.alt}`} onClick={() => onOpen(photo)}
+        className="group h-full w-full cursor-zoom-in rounded-none p-0 [--hover:transparent] [--active:transparent]">
+        {!hidden && (
+          <motion.div layoutId={near && !reduced ? `photo-${photo.id}` : undefined}
+            transition={spring.slow} style={{ width: w, height: h }}
+            className="relative overflow-hidden bg-[#eeeef1]">
+            {near && <TileMedia photo={photo} width={w} visible={visible && !paused} reduced={reduced} />}
+          </motion.div>
+        )}
+      </Button>
+    </div>
+  )
+}
+
+function TileMedia({ photo, width, visible, reduced }: { photo: Photo; width: number; visible: boolean; reduced: boolean }) {
+  const [loaded, setLoaded] = useState(false)
+  const video = useRef<HTMLVideoElement>(null)
   useEffect(() => {
-    if (!loaded || morphed) return
-    const t = setTimeout(() => setMorphed(true), spring.slow.duration * 1000 + 200)
-    return () => clearTimeout(t)
-  }, [loaded, morphed])
+    const element = video.current
+    if (!element) return
+    const sync = () => {
+      if (visible && !document.hidden && !reduced) element.play().catch(() => {})
+      else element.pause()
+    }
+    sync()
+    document.addEventListener('visibilitychange', sync)
+    return () => { element.pause(); document.removeEventListener('visibilitychange', sync) }
+  }, [visible, reduced])
 
   return (
-    <motion.button
-      layout
-      type="button"
-      onClick={() => onOpen(photo)}
-      aria-label={`Open ${photo.name}`}
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      // The staggered delay is for the first fade-in only; reflows on zoom move
-      // every tile at once, in step with the image resizing inside it.
-      transition={{ ...spring.slow, delay: Math.min(index, 15) * 0.025, layout: spring.slow }}
-      className="group flex aspect-square w-full cursor-zoom-in items-center justify-center outline-none"
-    >
-      {!hidden && (
-        <motion.div
-          layoutId={`photo-${photo.id}`}
-          transition={spring.slow}
-          onLayoutAnimationComplete={() => loaded && setMorphed(true)}
-          whileHover={{ scale: 1.025 }}
-          whileTap={{ scale: 0.97 }}
-          style={{ width: w, height: h }}
-          className={cn(
-            'relative overflow-hidden bg-[#eeeef1]',
-            'group-focus-visible:ring-2 group-focus-visible:ring-[#0071e3] group-focus-visible:ring-offset-2',
-          )}
-        >
-          <motion.img
-            src={photo.thumb.src}
-            alt=""
-            loading="lazy"
-            decoding="async"
-            draggable={false}
-            onLoad={() => setLoaded(true)}
-            initial={false}
-            animate={{ opacity: shown ? 1 : 0 }}
-            transition={spring.slow}
-            className="absolute inset-0 size-full object-cover select-none"
-          />
-        </motion.div>
+    <>
+      <motion.img src={photo.preview.src}
+        srcSet={`${photo.preview.src} ${photo.preview.width}w, ${photo.thumb.src} ${photo.thumb.width}w`}
+        sizes={`${Math.ceil(width)}px`} alt="" decoding="async" draggable={false}
+        onLoad={() => setLoaded(true)} initial={false}
+        animate={{ opacity: loaded ? 1 : 0 }} transition={spring.slow}
+        className="absolute inset-0 size-full object-cover select-none" />
+      {photo.kind === 'video' && visible && !reduced && (
+        <video ref={video} src={photo.video} poster={photo.preview.src} autoPlay muted loop playsInline
+          preload="none" aria-hidden className="pointer-events-none absolute inset-0 size-full object-cover" />
       )}
-    </motion.button>
+    </>
   )
 }

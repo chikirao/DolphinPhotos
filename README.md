@@ -2,20 +2,38 @@
 
 Фотографии дропа [@dtaintent](https://t.me/dtaintent) × [@ni24lab](https://t.me/ni24lab), оформленные в стиле общего альбома iCloud Photos.
 
-Это статический сайт: Vite + React + Tailwind, компоненты и анимации из [Fluid Functionalism](https://www.fluidfunctionalism.com/), хостинг на GitHub Pages.
+Это статический сайт: Vite + React + Tailwind, компоненты и анимации из [Fluid Functionalism](https://www.fluidfunctionalism.com/). Поддерживает Cloudflare Pages и GitHub Pages.
 
 ## Как добавить фото
 
-1. Положи файлы (`.jpg`, `.png`, `.webp`) в `src/photos/`. Они идут в порядке имён файлов: `01.jpg`, `02.jpg`, …
-2. Закоммить и запушь в `main`. GitHub Actions соберёт и задеплоит сайт.
+1. Положи файлы (`.jpg`, `.jpeg`, `.png`, `.webp`, `.avif`) в `src/photos/`.
+2. Порядок, серии и акценты задаёт `src/photos/album.json`: `normal` — одна ячейка, `feature` — до 2×2, `wide` — до 3×2. На узком экране или при большом зуме сетка уменьшает акценты, сохраняя порядок без пустых внутренних ячеек. Новые файлы вне списка добавляются в конец по имени.
+3. Для видео положи немой H.264 MP4 и одноимённый WebP-постер в `src/videos/`, а имя MP4 — в список альбома. Видимые видео зациклены; вне экрана и при свёрнутой вкладке останавливаются. При reduced motion показывается постер.
 
-Превью и версии для просмотрщика генерируются при сборке, а оригиналы отдаются для скачивания как есть.
+При сборке генерируются WebP: 360px / quality 72 для небольших плиток, 960px / 78 для акцентов и retina. Подготовленные фото до 2560px / 84 используются в просмотрщике и для скачивания без дублирования; для остальных изображений собирается версия 2560px / 86. Сетка монтирует медиа в пределах экрана + 900px; дальние изображения освобождаются без скачков раскладки. Просмотрщик держит ограниченный набор предзагрузки: текущий, два следующих и предыдущий кадр; слайд-шоу ждёт загрузку следующего.
+
+Исходная папка `newphotos/` с архивом остаётся локально и игнорируется Git. `node scripts/import-media.mjs` повторяет подготовку по полю `source` в списке альбома (нужен FFmpeg): HEIC → WebP, большие картинки до 2560px, MP4 до 960px/24fps без аудиодорожки. Существующие файлы пропускаются; `--force` пересоздаёт их из исходников. Подготовленные файлы в `src/` коммитятся, поэтому на сервере FFmpeg не нужен. Скачивание отдаёт подготовленный WebP / немой MP4; исходники не публикуются. У demo-фото сохраняются исходные JPEG и атрибуция.
+
+## Cloudflare Pages
+
+Подключи репозиторий в Workers & Pages → Create → Pages → Import a Git repository:
+
+- Production branch: `main`.
+- Build command: `npm run build`.
+- Build output directory: `dist`.
+- Environment: `NODE_VERSION=24`; `SITE_URL=https://твой-домен/` для постоянных OG/canonical ссылок. Без `SITE_URL` используется `CF_PAGES_URL`.
+
+`CF_PAGES=1` выставляется Cloudflare автоматически: сборка использует корень `/`. Для локальной проверки такой сборки в PowerShell: `$env:CF_PAGES='1'; $env:CF_PAGES_URL='https://example.pages.dev'; npm run build`. Для ручного Upload загружай `dist` после этой сборки. Имена медиа хешированы; `_headers` включает долгий кеш для `/assets/*`. Архив исходников в `dist` не попадает. [Лимит одного файла Pages — 25 MiB](https://developers.cloudflare.com/pages/platform/limits/); текущие подготовленные медиа укладываются в него.
+
+GitHub Actions продолжает обслуживать GitHub Pages отдельно. Домен подключается в Cloudflare Pages → Custom domains; для этого не нужен `public/CNAME`.
 
 ## Разработка
 
 ```bash
 npm install
 npm run dev
+npm run build
+node --test scripts/photo-layout.test.ts
 ```
 
 Все тексты альбома (заголовок, «Expires», автор, ссылки) лежат в `src/config.ts`.

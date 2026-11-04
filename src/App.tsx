@@ -11,7 +11,7 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 import { photos as allPhotos } from '@/lib/photos'
 
 export default function App() {
-  const [square, setSquare] = useState(false)
+  const [square, setSquare] = useState(true)
   const [reversed, setReversed] = useState(false)
   const [zoom, setZoom] = useState(3)
   const [viewerIndex, setViewerIndex] = useState<number | null>(null)
@@ -92,6 +92,7 @@ export default function App() {
               zoom={zoom}
               square={square}
               activeId={activeId}
+              paused={viewerIndex !== null}
               onOpen={(p) => {
                 setOpenedId(p.id)
                 setViewerIndex(photos.indexOf(p))

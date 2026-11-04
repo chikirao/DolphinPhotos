@@ -9,9 +9,13 @@ import { imagetools } from 'vite-imagetools'
 // without one it lives at chikirao.github.io/DolphinPhotos/.
 const cnameFile = path.resolve(__dirname, 'public/CNAME')
 const domain = fs.existsSync(cnameFile) ? fs.readFileSync(cnameFile, 'utf8').trim() : null
-const base = domain ? '/' : '/DolphinPhotos/'
+// Cloudflare sets CF_PAGES during Git builds. Keep GitHub project-page builds
+// working too; SITE_URL can supply the production domain for social previews.
+const cloudflare = process.env.CF_PAGES === '1'
+const base = cloudflare || domain ? '/' : '/DolphinPhotos/'
 // Link previews need absolute URLs (og:image, canonical).
-const siteUrl = domain ? `https://${domain}/` : 'https://chikirao.github.io/DolphinPhotos/'
+const siteUrl = process.env.SITE_URL?.replace(/\/?$/, '/')
+  ?? (domain ? `https://${domain}/` : cloudflare ? `${process.env.CF_PAGES_URL}/` : 'https://chikirao.github.io/DolphinPhotos/')
 
 // https://vite.dev/config/
 export default defineConfig({

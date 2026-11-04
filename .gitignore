@@ -28,3 +28,6 @@ AGENTS.md
 .claude/
 
 # Local demo filler photos (Wikimedia Commons) — not part of the drop
+
+# Intake originals, archive and contact sheets stay local; prepared media lives in src/.
+/newphotos/
