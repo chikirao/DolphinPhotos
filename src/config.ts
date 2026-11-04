@@ -2,8 +2,8 @@
 export const album = {
   /** Big heading under the dolphin tile. */
   title: 'Sep 27, 2026',
-  /** Pill above the title. Set to null to hide it. */
-  expires: 'EXPIRES OCTOBER 30',
+  /** Local browser date in the pill; fallback if the date cannot be read. Set to null to hide. */
+  expires: { fallback: 'NEVER' },
   /** "Created by / Model / Help" line under the item count. */
   people: [
     {

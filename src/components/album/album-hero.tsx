@@ -6,6 +6,7 @@ import { album } from '@/config'
 import { DolphinTile } from '@/components/album/dolphin-tile'
 import { useLottieBurst } from '@/lib/use-lottie-burst'
 import { useMediaQuery } from '@/lib/use-media-query'
+import { useExpiryLabel } from '@/lib/use-expiry-label'
 
 const CloudDownloadIcon = () => <img src={cloudDownloadIcon} alt="" className="block" />
 
@@ -18,6 +19,7 @@ interface AlbumHeroProps {
 const DOWNLOAD_SPLASH_ORIGIN: [number, number] = [256, 380]
 
 export function AlbumHero({ count }: AlbumHeroProps) {
+  const expiryLabel = useExpiryLabel(album.expires?.fallback ?? 'NEVER')
   // Twice the whale's spout (240px) on desktop, the same as it on phones.
   const wide = useMediaQuery('(min-width: 640px)')
   const splash = useLottieBurst({ asset: 'downloadSplash', size: wide ? 480 : 240, origin: DOWNLOAD_SPLASH_ORIGIN })
@@ -29,7 +31,7 @@ export function AlbumHero({ count }: AlbumHeroProps) {
         <div className="py-[5px]">
           <div className="flex h-5 items-center rounded-full bg-[#e5e5ea] px-[7px] py-1 text-[10px] font-semibold">
             <img src={timerIcon} alt="" className="mr-[3px]" />
-            {album.expires}
+            {expiryLabel}
           </div>
         </div>
       )}
