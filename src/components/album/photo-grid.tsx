@@ -30,7 +30,7 @@ export function PhotoGrid({ photos, zoom, square, activeId, paused, onOpen }: Ph
   }, [])
   const mobile = width > 0 && width < 600
   const gapX = mobile ? 2 : 16
-  const gapY = mobile ? 2 : 34
+  const gapY = gapX
   const cols = mobile ? MOBILE_COLUMNS[zoom] : Math.max(2, Math.round((width + gapX) / (BOX_SIZES[zoom] + gapX)))
   const box = width ? Math.max(1, (width - gapX * (cols - 1)) / cols) : BOX_SIZES[zoom]
   const placements = useMemo(() => layoutPhotos(photos, cols), [photos, cols])

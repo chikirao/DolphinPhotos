@@ -9,8 +9,11 @@ import { PhotoViewer } from '@/components/album/photo-viewer'
 import { SplashRain } from '@/components/album/splash-rain'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { photos as allPhotos } from '@/lib/photos'
+import { arrangeAlbum, readAlbumVariant } from '@/lib/album-variants'
 
 export default function App() {
+  const [variant] = useState(() => readAlbumVariant(location.search))
+  const arranged = useMemo(() => arrangeAlbum(allPhotos, variant), [variant])
   const [square, setSquare] = useState(true)
   const [reversed, setReversed] = useState(false)
   const [zoom, setZoom] = useState(3)
@@ -25,7 +28,7 @@ export default function App() {
   const heroRef = useRef<HTMLDivElement>(null)
   const heroVisible = useInView(heroRef, { margin: '-44px 0px 0px 0px', initial: true })
 
-  const photos = useMemo(() => (reversed ? [...allPhotos].reverse() : allPhotos), [reversed])
+  const photos = useMemo(() => (reversed ? [...arranged].reverse() : arranged), [arranged, reversed])
   const currentId = viewerIndex === null ? null : (photos[viewerIndex]?.id ?? null)
   const activeId = currentId !== null && currentId === openedId ? currentId : null
 
@@ -40,7 +43,7 @@ export default function App() {
       return
     }
     setOpenedId(photo.id)
-    setViewerIndex(photos.indexOf(photo))
+    setViewerIndex(photos.findIndex((item) => item.id === photo.id))
   }, [photos])
   const syncFromHash = useRef(openFromHash)
   syncFromHash.current = openFromHash
