@@ -384,7 +384,7 @@
   },
   {
     "file": "drop-img_8696.webp",
-    "source": "IMG_8696.JPEG",
+    "source": "IMG_8700.JPEG",
     "group": "Yellow pipes",
     "emphasis": "normal",
     "alt": "Yellow pipes",
@@ -416,7 +416,7 @@
   },
   {
     "file": "drop-img_8702.webp",
-    "source": "IMG_8702.JPEG",
+    "source": "IMG_8718.JPEG",
     "group": "Walking together",
     "emphasis": "normal",
     "alt": "Walking together",
@@ -428,15 +428,6 @@
     "source": "IMG_8710.JPEG",
     "group": "Walking together",
     "emphasis": "feature",
-    "alt": "Walking together",
-    "width": 2048,
-    "height": 1536
-  },
-  {
-    "file": "drop-img_8718.webp",
-    "source": "IMG_8718.JPEG",
-    "group": "Walking together",
-    "emphasis": "normal",
     "alt": "Walking together",
     "width": 2048,
     "height": 1536
@@ -671,21 +662,12 @@
   },
   {
     "file": "drop-img_8807.webp",
-    "source": "IMG_8807.JPEG",
+    "source": "IMG_8814.JPEG",
     "group": "On the steps",
     "emphasis": "feature",
     "alt": "On the steps",
     "width": 2048,
     "height": 1536
-  },
-  {
-    "file": "drop-img_8812.webp",
-    "source": "IMG_8812.JPEG",
-    "group": "On the steps",
-    "emphasis": "normal",
-    "alt": "On the steps",
-    "width": 1536,
-    "height": 2048
   },
   {
     "file": "demo-11.jpg",
@@ -696,7 +678,7 @@
   },
   {
     "file": "drop-img_8815.webp",
-    "source": "IMG_8815.JPEG",
+    "source": "IMG_8816.JPEG",
     "group": "Portrait / mint",
     "emphasis": "normal",
     "alt": "Portrait / mint",
@@ -705,7 +687,7 @@
   },
   {
     "file": "drop-img_8824.webp",
-    "source": "IMG_8824.JPEG",
+    "source": "IMG_8826.JPEG",
     "group": "Portrait / mint",
     "emphasis": "feature",
     "alt": "Portrait / mint",
@@ -739,7 +721,7 @@
   },
   {
     "file": "drop-img_8831.webp",
-    "source": "IMG_8831.JPEG",
+    "source": "IMG_8835.JPEG",
     "group": "Portrait / silver",
     "emphasis": "feature",
     "alt": "Portrait / silver",
@@ -971,7 +953,7 @@
   },
   {
     "file": "drop-img_8969.webp",
-    "source": "IMG_8969.JPEG",
+    "source": "IMG_8967.JPEG",
     "group": "Ocean hood",
     "emphasis": "feature",
     "alt": "Ocean hood",

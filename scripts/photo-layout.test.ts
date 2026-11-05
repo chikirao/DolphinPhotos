@@ -6,7 +6,7 @@ import { layoutPhotos, type LayoutItem } from '../src/lib/photo-layout.ts'
 const album = JSON.parse(readFileSync(new URL('../src/photos/album.json', import.meta.url), 'utf8'))
 
 test('every curated asset exists once, including six silent loops', () => {
-  assert.equal(album.length, 117)
+  assert.equal(album.length, 115)
   assert.equal(new Set(album.map((item: { file: string }) => item.file)).size, album.length)
   assert.equal(album.filter((item: { file: string }) => item.file.endsWith('.mp4')).length, 6)
   for (const item of album) {

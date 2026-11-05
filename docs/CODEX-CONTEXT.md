@@ -9,7 +9,7 @@ No backend, database or runtime third-party API is needed.
 - Default composition is **mixtape**. Other edits remain available through
   `?layout=original`, `?layout=editorial`, `?layout=objects`.
 - Square grid by default. Gutters are equal: 16px desktop, 2px mobile.
-- 117 items, including six silent looping MP4s. Repeated takes have already been
+- 115 items, including six silent looping MP4s. Repeated takes have already been
   curated: do not restore deleted photos or import the whole shoot again.
 - `src/photos/album.json` defines the canonical selection and metadata;
   `src/lib/album-variants.ts` defines compositions and emphasis.
