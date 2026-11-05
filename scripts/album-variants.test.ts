@@ -9,8 +9,8 @@ const source = JSON.parse(readFileSync(new URL('../src/photos/album.json', impor
 
 test('query selects only known variants and safely falls back', () => {
   for (const v of LAYOUT_VARIANTS) assert.equal(readAlbumVariant(`?layout=${v}`), v)
-  assert.equal(readAlbumVariant('?layout=unknown'), 'original')
-  assert.equal(readAlbumVariant(''), 'original')
+  assert.equal(readAlbumVariant('?layout=unknown'), 'mixtape')
+  assert.equal(readAlbumVariant(''), 'mixtape')
   assert.equal(readAlbumVariant('?other=1&layout=mixtape'), 'mixtape')
 })
 

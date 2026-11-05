@@ -9,7 +9,7 @@ interface VariantItem {
 
 export function readAlbumVariant(search: string): AlbumVariant {
   const value = new URLSearchParams(search).get('layout')
-  return LAYOUT_VARIANTS.find((variant) => variant === value) ?? 'original'
+  return LAYOUT_VARIANTS.find((variant) => variant === value) ?? 'mixtape'
 }
 
 const image = (n: number) => `drop-img_${n}.webp`
