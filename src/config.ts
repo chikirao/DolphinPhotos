@@ -35,6 +35,7 @@ export const album = {
 
 /** Slideshow soundtrack credits, keyed by the mp3 file name in src/assets/audio. */
 export const soundtrack: Record<string, { title: string; artist: string }> = {
+  'bassvictim - 7 (feat. Fimiguerrero)': { title: '7 (feat. Fimiguerrero)', artist: 'bassvictim' },
   'Dylan Thom - Hope Over Everything': { title: 'Hope Over Everything', artist: 'Dylan Thom' },
   'Dylan Thom - The Life': { title: 'The Life', artist: 'Dylan Thom' },
   'Ecco2k - Sky Burial': { title: 'Sky Burial', artist: 'Ecco2k' },
